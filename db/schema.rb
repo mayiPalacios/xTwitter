@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_192703) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_205517) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,17 +26,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_192703) do
   create_table "followers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "following_id"
+    t.integer "followee_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashtag_name"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "tweets_id"
   end
 
   create_table "tags", force: :cascade do |t|
     t.bigint "tweet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "hashtag_id"
     t.index ["tweet_id"], name: "index_tags_on_tweet_id"
   end
 
@@ -47,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_192703) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "like_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,6 +72,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_192703) do
 
   add_foreign_key "bookmarks", "tweets"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "followers", "users", column: "followee_id"
+  add_foreign_key "followers", "users", column: "following_id"
+  add_foreign_key "likes", "tweets", column: "tweets_id"
+  add_foreign_key "likes", "users"
+  add_foreign_key "tags", "hashtags"
   add_foreign_key "tags", "tweets"
+  add_foreign_key "tweets", "likes"
   add_foreign_key "tweets", "users"
 end
