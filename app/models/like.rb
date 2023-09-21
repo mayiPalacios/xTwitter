@@ -1,8 +1,6 @@
 class Like < ApplicationRecord
   belongs_to :user
   belongs_to :tweet
-  #validates :tweets_id, presence: true
-  #validates :user_id, presence: true
   validate :unique_combination 
 
   private 

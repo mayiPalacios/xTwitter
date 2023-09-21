@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    has_many :bookmarks #,foreign_key: 'bookmark_id' ,class_name: 'bookmark'
-    has_many :tweets  #,foreign_key: 'user_id',class_name: 'tweet'
+    has_many :bookmarks 
+    has_many :tweets  
     has_many :followees, class_name: 'Follower', foreign_key: 'followee_id'
     has_many :replies
     has_many :followings, class_name: 'Follower', foreign_key: 'following_id'
