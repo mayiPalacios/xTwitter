@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_21_164244) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_200756) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_164244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.integer "tweets_id"
+    t.integer "tweet_id"
   end
 
   create_table "replies", force: :cascade do |t|
@@ -86,7 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_164244) do
   add_foreign_key "bookmarks", "users"
   add_foreign_key "followers", "users", column: "followee_id"
   add_foreign_key "followers", "users", column: "following_id"
-  add_foreign_key "likes", "tweets", column: "tweets_id"
+  add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
   add_foreign_key "replies", "tweets"
   add_foreign_key "replies", "users"

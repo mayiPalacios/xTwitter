@@ -1,6 +1,5 @@
 class Hashtag < ApplicationRecord
     has_many :tags
- 
     validate :hashtag_name_presence 
 
     private 
