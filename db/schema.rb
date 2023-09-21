@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_205517) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_211956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_205517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.integer "tweets_id"
+    t.integer "tweet_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.text "reply_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "tweet_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -68,14 +76,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_205517) do
     t.integer "following_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "password"
+    t.string "username"
+    t.string "lastname"
   end
 
   add_foreign_key "bookmarks", "tweets"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "followers", "users", column: "followee_id"
   add_foreign_key "followers", "users", column: "following_id"
-  add_foreign_key "likes", "tweets", column: "tweets_id"
+  add_foreign_key "likes", "tweets"
   add_foreign_key "likes", "users"
+  add_foreign_key "replies", "tweets"
+  add_foreign_key "replies", "users"
   add_foreign_key "tags", "hashtags"
   add_foreign_key "tags", "tweets"
   add_foreign_key "tweets", "likes"
