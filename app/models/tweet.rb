@@ -12,17 +12,20 @@ class Tweet < ApplicationRecord
     create([
       { body: "Ejemplo 1", quote: true, retweet: false, user_id: 1},
       { body: "Ejemplo 2", quote: false, retweet: true, user_id: 2},
-      { body: "Ejemplo 3", quote: true, retweet: true, user_id: 3 },
-      { body: "Ejemplo 4", quote: false, retweet: false, user_id: 4},
+      { body: "Ejemplo 3", quote: true, retweet: true,  user_id: 3 },
+      { body: "Ejemplo 4", quote: false, retweet: false,user_id: 4},
       { body: "Ejemplo 5", quote: true, retweet: false, user_id: 5 },
       { body: "Ejemplo 6", quote: false, retweet: true, user_id: 1 },
-      { body: "Ejemplo 7", quote: true, retweet: true, user_id: 2},
-      { body: "Ejemplo 8", quote: false, retweet: false, user_id: 3 },
+      { body: "Ejemplo 7", quote: true, retweet: true,  user_id: 2},
+      { body: "Ejemplo 8", quote: false, retweet: false,user_id: 3 },
       { body: "Ejemplo 9", quote: true, retweet: false, user_id: 4 },
-      { body: "Ejemplo 10", quote: false, retweet: true, user_id: 5 }
+      { body: "Ejemplo 10", quote: false, retweet: true,user_id: 5 }
     ])
   }
   
+  scope :tweet_by_user, ->(user_id){
+    where(user_id: user)
+  }
   
   scope :tweets_and_replies_by_user, ->(user_id){
     where(user_id: user_id).or(where(id: Replie.where(user_id: user_id).select(:tweet_id)))
@@ -35,6 +38,47 @@ class Tweet < ApplicationRecord
   scope :count_retweet, -> (user_id){
     where(user_id: user_id, retweet: true, quote: false).count
   }
+
+# remember put this 
+# tweet = Tweet.new()
+# tweet.like(user_id)
+# Like a tweet: Create a method that encapsulates the like logic accepting a user
+
+  def like(user_id,tweet_id)
+
+    if self.likes.exists?(user_id: user_id, tweet_id: tweet_id)
+              
+      return "you have already liked this tweet"
+
+    end
+    like = self.likes.new(user_id: user_id,tweet_id: tweet_id)
+   
+    if like.save!
+      return "saved it"
+    end
+  end
+
+  #Retweet method: Create a method that encapsulates
+  #the retweet logic accepting a user a parameter
+
+  def retweet(user_id)
+
+  retweet = self.tweets( quote: false, retweet: true,user_id: user_id,);
+  retweet.save!
+ 
+  end
+
+#QuoteTweet: Create a method that encapsulates 
+#the retweet logic accepting a user an a text 
+#body as parameter
+
+  def quote(user_id)
+
+    retweet = self.tweets( body: "writting something",quote: true, retweet: false,user_id: user_id,);
+    retweet.save!
+   
+    end
+
 
  private 
 

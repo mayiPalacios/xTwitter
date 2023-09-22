@@ -3,6 +3,10 @@ class Like < ApplicationRecord
   belongs_to :tweet
   validate :unique_combination 
 
+ 
+  
+
+
   private 
 
   def unique_combination
