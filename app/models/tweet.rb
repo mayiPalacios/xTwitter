@@ -3,6 +3,7 @@ class Tweet < ApplicationRecord
   has_many :likes
   has_many :tweets
   has_many :bookmarks
+  has_many :tags
   has_many :replies
   validates :body, length: { maximum: 255 }
   validate :body_presence_in_quote
@@ -11,15 +12,15 @@ class Tweet < ApplicationRecord
   scope :create_sample_tweets, -> {
     create([
       { body: "Ejemplo 1", quote: true, retweet: false, user_id: 1},
-      { body: "Ejemplo 2", quote: false, retweet: true, user_id: 2},
-      { body: "Ejemplo 3", quote: true, retweet: true,  user_id: 3 },
+      {    quote: false, retweet: true, user_id: 2},
+      {   quote: false, retweet: true,  user_id: 3 },
       { body: "Ejemplo 4", quote: false, retweet: false,user_id: 4},
       { body: "Ejemplo 5", quote: true, retweet: false, user_id: 5 },
-      { body: "Ejemplo 6", quote: false, retweet: true, user_id: 1 },
-      { body: "Ejemplo 7", quote: true, retweet: true,  user_id: 2},
+      {  quote: false, retweet: true, user_id: 1 },
+      {   quote: true, retweet: true,  user_id: 2},
       { body: "Ejemplo 8", quote: false, retweet: false,user_id: 3 },
       { body: "Ejemplo 9", quote: true, retweet: false, user_id: 4 },
-      { body: "Ejemplo 10", quote: false, retweet: true,user_id: 5 }
+      {  quote: false, retweet: true,user_id: 5 }
     ])
   }
   
@@ -41,18 +42,21 @@ class Tweet < ApplicationRecord
 
 # remember put this 
 # tweet = Tweet.new()
+# give a value to tweet object
+# tweet.save!
 # tweet.like(user_id)
 # Like a tweet: Create a method that encapsulates the like logic accepting a user
 
-  def like(user_id,tweet_id)
+  def like(user_id)
+    
 
-    if self.likes.exists?(user_id: user_id, tweet_id: tweet_id)
+    if self.likes.exists?(user_id: user_id)
               
       return "you have already liked this tweet"
 
     end
-    like = self.likes.new(user_id: user_id,tweet_id: tweet_id)
-   
+    like = likes.new(user_id: user.id)
+
     if like.save!
       return "saved it"
     end
@@ -61,9 +65,9 @@ class Tweet < ApplicationRecord
   #Retweet method: Create a method that encapsulates
   #the retweet logic accepting a user a parameter
 
-  def retweet(user_id)
+  def retweet_method(user_id)
 
-  retweet = self.tweets( quote: false, retweet: true,user_id: user_id,);
+  retweet = Tweet.new(quote: false,retweet: true,user_id: user_id);
   retweet.save!
  
   end
@@ -72,10 +76,11 @@ class Tweet < ApplicationRecord
 #the retweet logic accepting a user an a text 
 #body as parameter
 
-  def quote(user_id)
 
-    retweet = self.tweets( body: "writting something",quote: true, retweet: false,user_id: user_id,);
-    retweet.save!
+  def quote_method(user_id,body)
+
+    quote = Tweet.new( body: body,quote: true, retweet: false,user_id: user_id);
+    quote.save!
    
     end
 
