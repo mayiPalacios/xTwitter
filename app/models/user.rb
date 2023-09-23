@@ -12,6 +12,84 @@ class User < ApplicationRecord
     validate :username_presence_in_user
     validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@\/\*\-\+\_])[A-Za-z\d!@\/\*\-\+\_]{8,}\z/ , message: "invalid password"  }
     
+# En tu modelo User.rb
+scope :create_sample_users, -> {
+    create([
+      { 
+        name: "Usuario 1",
+        email: "usuario1@example.com",
+        password: "Password123@",
+        username: "user1",
+        lastname: "Apellido1"
+      },
+      { 
+        name: "Usuario 2",
+        email: "usuario2@example.com",
+        password: "Password123@",
+        username: "user2",
+        lastname: "Apellido2"
+      },
+      { 
+        name: "Usuario 3",
+        email: "usuario3@example.com",
+        password: "Password123@",
+        username: "user3",
+        lastname: "Apellido3"
+      },
+      { 
+        name: "Usuario 4",
+        email: "usuario4@example.com",
+        password: "Password123@",
+        username: "user4",
+        lastname: "Apellido4"
+      },
+      { 
+        name: "Usuario 5",
+        email: "usuario5@example.com",
+        password: "Password123@",
+        username: "user5",
+        lastname: "Apellido5"
+      },
+      { 
+        name: "Usuario 6",
+        email: "usuario6@example.com",
+        password: "Password123@",
+        username: "user6",
+        lastname: "Apellido6"
+      },
+      { 
+        name: "Usuario 7",
+        email: "usuario7@example.com",
+        password: "Password123@",
+        username: "user7",
+        lastname: "Apellido7"
+      },
+      { 
+        name: "Usuario 8",
+        email: "usuario8@example.com",
+        password: "Password123@",
+        username: "user8",
+        lastname: "Apellido8"
+      },
+      { 
+        name: "Usuario 9",
+        email: "usuario9@example.com",
+        password: "Password123@",
+        username: "user9",
+        lastname: "Apellido9"
+      },
+      { 
+        name: "Usuario 10",
+        email: "usuario10@example.com",
+        password: "Password123@",
+        username: "user10",
+        lastname: "Apellido10"
+      }
+    ])
+  }
+  
+ 
+
     private 
     
     def email_presence_in_user

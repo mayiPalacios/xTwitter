@@ -10,17 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_21_211956) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_23_003118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookmarks", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "tweet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tweet_id"], name: "index_bookmarks_on_tweet_id"
-    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "followers", force: :cascade do |t|
@@ -53,11 +49,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_211956) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.bigint "tweet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "hashtag_id"
-    t.index ["tweet_id"], name: "index_tags_on_tweet_id"
+    t.integer "tweet_id"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -67,7 +62,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_211956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.integer "like_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -82,8 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_211956) do
     t.string "lastname"
   end
 
-  add_foreign_key "bookmarks", "tweets"
-  add_foreign_key "bookmarks", "users"
   add_foreign_key "followers", "users", column: "followee_id"
   add_foreign_key "followers", "users", column: "following_id"
   add_foreign_key "likes", "tweets"
@@ -92,6 +84,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_211956) do
   add_foreign_key "replies", "users"
   add_foreign_key "tags", "hashtags"
   add_foreign_key "tags", "tweets"
-  add_foreign_key "tweets", "likes"
   add_foreign_key "tweets", "users"
 end
