@@ -1,5 +1,5 @@
 class Hashtag < ApplicationRecord
-    has_many :hashtag 
+    has_many :tags 
 
  
     def hashtag(hashtag_name)

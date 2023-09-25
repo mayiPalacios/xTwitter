@@ -4,7 +4,7 @@ FactoryBot.define do
     follower_number { 1 }
     following_number { 1 }
     email {""}
-    password {"pro"}
+    password {"Maria@1234_jjj"}
     username {""}
     lastname {Faker::Name.last_name}
   end

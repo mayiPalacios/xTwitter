@@ -1,7 +1,6 @@
 class Tweet < ApplicationRecord
   belongs_to :user
   has_many :likes
-  has_many :tweets
   has_many :bookmarks
   has_many :tags
   has_many :replies
