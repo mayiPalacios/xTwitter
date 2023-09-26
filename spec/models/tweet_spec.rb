@@ -24,7 +24,7 @@ RSpec.describe Tweet, type: :model do
       expect(tweets_by_user).not_to include(other_tweet)
     end
 
-    describe '.count_quotes' do
+    
       it 'counts the number of quotes for a specific user' do
     
         user = FactoryBot.create(:user)
@@ -43,11 +43,7 @@ RSpec.describe Tweet, type: :model do
       
         expect(count).to eq(2)
       end
-    end
-
-  end
-
-  describe '.tweets_and_replies_by_user' do
+   
     it 'returns tweets and replies by a specific user' do
      
       user1 = FactoryBot.create(:user)
@@ -67,7 +63,9 @@ RSpec.describe Tweet, type: :model do
       expect(tweets_and_replies).to include(tweet1_user1, tweet2_user1, tweet_user2)
       expect(tweets_and_replies).not_to include(reply1_user1, reply2_user2)
     end
-  end
+
+
+end
 
   describe 'validations' do
     it 'validates presence of body in quote' do
