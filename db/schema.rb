@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_25_170435) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_26_035724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,11 +43,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_170435) do
   end
 
   create_table "replies", force: :cascade do |t|
-    t.text "reply_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "tweet_id"
+    t.text "body"
   end
 
   create_table "tags", force: :cascade do |t|

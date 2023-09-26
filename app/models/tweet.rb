@@ -24,11 +24,11 @@ class Tweet < ApplicationRecord
   }
   
   scope :tweet_by_user, ->(user_id){
-    where(user_id: user)
+    where(user_id: user_id)
   }
   
   scope :tweets_and_replies_by_user, ->(user_id){
-    where(user_id: user_id).or(where(id: Replie.where(user_id: user_id).select(:tweet_id)))
+    where(user_id: user_id).or(where(id: Reply.where(user_id: user_id).select(:tweet_id)))
   }
 
   scope :count_quotes, -> (user_id){
