@@ -2,7 +2,7 @@ class Reply < ApplicationRecord
     belongs_to :user
     belongs_to :tweet
     validates :body, length: { maximum: 255 }
-    validate :body_presence_in_replies 
+    validates :body, presence: true 
     scope :create_sample_replies, -> {
         create([
           { body: "Ejemplo 1", tweet_id: 2, user_id: 1},
@@ -21,9 +21,5 @@ class Reply < ApplicationRecord
 
     private
 
-    def body_presence_in_replies 
-       if self.body.nil?
-        self.errors.add(:body, "must contain content f0r reply") 
-    end
-end
+    
 end

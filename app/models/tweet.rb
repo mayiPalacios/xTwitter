@@ -23,19 +23,19 @@ class Tweet < ApplicationRecord
     ])
   }
   
-  scope :tweet_by_user, ->(user_id){
+  scope :tweet_by_user, ->(user_id){#
     where(user_id: user_id)
   }
   
-  scope :tweets_and_replies_by_user, ->(user_id){
+  scope :tweets_and_replies_by_user, ->(user_id){ #
     where(user_id: user_id).or(where(id: Reply.where(user_id: user_id).select(:tweet_id)))
   }
 
-  scope :count_quotes, -> (user_id){
+  scope :count_quotes, -> (user_id){ #
     where(user_id: user_id, retweet: false, quote: true).count
   }
 
-  scope :count_retweet, -> (user_id){
+  scope :count_retweet, -> (user_id){#
     where(user_id: user_id, retweet: true, quote: false).count
   }
 
@@ -67,19 +67,24 @@ class Tweet < ApplicationRecord
   def retweet_method(user_id)
 
   retweet = Tweet.new(quote: false,retweet: true,user_id: user_id);
-  retweet.save!
- 
+
+ if retweet.save!
+  return "saved it"
+end
   end
 
 #QuoteTweet: Create a method that encapsulates 
-#the retweet logic accepting a user an a text 
+#the quote logic accepting a user an a text 
 #body as parameter
 
 
   def quote_method(user_id,body)
 
     quote = Tweet.new( body: body,quote: true, retweet: false,user_id: user_id);
-    quote.save!
+
+    if quote.save!
+      return "saved it"
+    end
    
     end
 

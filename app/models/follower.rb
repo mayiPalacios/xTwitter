@@ -4,7 +4,7 @@ class Follower < ApplicationRecord
   validate :unique_combination 
 
 
- scope :count_following,-> (user_id){
+ scope :count_following,-> (user_id){#
    where(following_id: user_id).count
  }
 

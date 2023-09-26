@@ -1,7 +1,7 @@
 class Hashtag < ApplicationRecord
     has_many :tags 
 
- 
+ ##
     def hashtag(hashtag_name)
       
       tweet = Tweet.new(body:"example 1",quote: false,retweet: false,user_id: user_id);

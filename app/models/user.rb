@@ -8,8 +8,6 @@ class User < ApplicationRecord
     validates :username, uniqueness: true , presence: true
     validates :password, presence: true
     validates :password, length: { minimum: 12 }
-    validate :email_presence_in_user
-    validate :username_presence_in_user
     validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@\/\*\-\+\_])[A-Za-z\d!@\/\*\-\+\_]{8,}\z/ , message: "invalid password"  }
     
 # En tu modelo User.rb
