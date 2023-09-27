@@ -88,6 +88,27 @@ end
    
     end
 
+    #steps
+    #tweet = Tweet.new(body: "this is a example #naruto.",user_id: 2)
+    #tweet.create_hashtags_from_body
+
+    def create_hashtags_from_body
+      body.scan(/#\w+/).each do |hashtag_text|
+        hashtag_name = hashtag_text[1..-1]  
+        
+        
+        hashtag = Hashtag.find_or_initialize_by(hashtag_name: hashtag_name)
+        
+        unless Hashtag.exists?(hashtag_name: hashtag_name)
+          tag = tags.build(hashtag: hashtag)  
+          tag.save  
+          hashtag.save  
+          return "Saved it"  
+        end
+        return "this hashtag has already been created"
+      end
+    end
+
 
  private 
 
@@ -109,5 +130,7 @@ def body_nil_for_retweet
      errors.add(:body, "must contain nil content f0r retweets")
   end
 end
+
+
 
 end

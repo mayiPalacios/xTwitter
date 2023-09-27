@@ -1,6 +1,27 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  
+  #resources :tweet , only: [:create,:update] 
+  
+  # post '/tweet/create' => 'tweet#create'
+   #put  '/tweet/:id' => 'tweet#update'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  #like Tweet 
+  #resources :like do
+    #  resources :tweet 
+   #   resources :user
+  #end
+  #post 'like/:id/'
+
+  #resources :retweet , only: [:create]
+ # post '/retweet/create' -> 'retweet#create'
+
+
+#resources :users do
+ #    resources :tweets 
+#end
+ 
+  
+
+
 end

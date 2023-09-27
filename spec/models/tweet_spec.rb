@@ -12,7 +12,7 @@ RSpec.describe Tweet, type: :model do
   end
   
   describe 'scopes' do
-
+    
     it 'returns tweets by a specific user' do
       user = FactoryBot.create(:user) 
       tweet1 = FactoryBot.create(:tweet, user: user)
@@ -153,6 +153,21 @@ it 'encapsulates the quote logic accepting a user an a text body as parameter' d
   quote = tweet.quote_method(user1.id,"testing")
    
   expect(quote).to include("saved it")
+  end
+
+  it 'encapsulates the logic to scan the body text of a tweet and create a new hashtag' do
+    tweet = FactoryBot.build(:tweet,quote: false,retweet: false,body: "this is a hashtag ##{Faker::Lorem.word}")
+
+    duplicate_tweet = FactoryBot.build(:tweet,quote: false,retweet: false,body: tweet.body)
+
+    tweet.save!
+    hashtag = tweet.create_hashtags_from_body
+    expect(hashtag).to include("Saved it")
+    
+    duplicate_hashtag = duplicate_tweet.create_hashtags_from_body
+    expect(duplicate_hashtag).to include("this hashtag has already been created")
+    
+ 
   end
 
 end
