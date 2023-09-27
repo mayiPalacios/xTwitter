@@ -5,7 +5,9 @@ RSpec.describe Bookmark, type: :model do
        it { should belong_to(:tweet) }  
      
        describe 'scopes' do
-              it 'returns bookmarks by a specific user' do
+       
+              context "returns bookmarks by a specific user" do      
+              it 'should returns bookmarks by a specific user' do
                      user = FactoryBot.create(:user) 
                      tweet = FactoryBot.create(:tweet)
                      tweet2 = FactoryBot.create(:tweet)
@@ -18,6 +20,8 @@ RSpec.describe Bookmark, type: :model do
                      expect(bookmark_by_user).to include(book, book2)
                      expect(bookmark_by_user).not_to include(other_bookmark)
                    end   
+              end
+        
         
 
        end
