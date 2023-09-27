@@ -12,8 +12,6 @@ class Follower < ApplicationRecord
   where(followee_id: user_id).count
 }
 
-
-
  scope :create_sample_follower, -> {
   create([
     {  following_id: 1, followee_id: 3},

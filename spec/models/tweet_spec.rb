@@ -88,11 +88,9 @@ RSpec.describe Tweet, type: :model do
         
         reply1_user1 = FactoryBot.create(:reply, user_id: user1.id, tweet_id: tweet_user2.id)
         reply2_user2 = FactoryBot.create(:reply, user_id: user2.id, tweet_id: tweet1_user1.id)
-        
-        
+            
         tweets_and_replies = Tweet.tweets_and_replies_by_user(user1.id)
-        
-        
+          
         expect(tweets_and_replies).to include(tweet1_user1, tweet2_user1, tweet_user2)
         expect(tweets_and_replies).not_to include(reply1_user1, reply2_user2)
       end
@@ -104,7 +102,6 @@ end
 
   describe 'validations' do
 
-    
     context 'test f0r validate 0f body_presence_in_quote' do 
 
       it 'should validate presence of body in quote' do
@@ -112,13 +109,12 @@ end
         tweet1 = FactoryBot.build(:tweet, quote: true, retweet: false, body: 'This is a quote')
         expect(tweet1).to be_valid
   
-        
         tweet2 = FactoryBot.build(:tweet, quote: true, retweet: false, body: nil)
         expect(tweet2).not_to be_valid
         expect(tweet2.errors[:body]).to include("must contain content  quotes")
       end
 
-    end
+  end
  
     context 'test f0r validate 0f body_nil_for_retweet' do 
       it 'should validate presence of body in retweet' do 
@@ -132,22 +128,20 @@ end
      
       end
 
-    end
+  end
  
 
     context 'test f0r validate 0f body_presence_in_tweet' do 
-      it 'should validate presence of body in tweet' do
-        tweet = FactoryBot.build(:tweet,quote: false,retweet: false,body: "this is a tweet")
-        expect(tweet).to be_valid
+          it 'should validate presence of body in tweet' do
+          tweet = FactoryBot.build(:tweet,quote: false,retweet: false,body: "this is a tweet")
+          expect(tweet).to be_valid
     
-        tweet2 = FactoryBot.build(:tweet,quote: false,retweet: false,body: nil)
-        expect(tweet2).not_to be_valid
-        expect(tweet2.errors[:body]).to include("must_contain content by tweets")
+          tweet2 = FactoryBot.build(:tweet,quote: false,retweet: false,body: nil)
+          expect(tweet2).not_to be_valid
+          expect(tweet2.errors[:body]).to include("must_contain content by tweets")
      
-      end
-    end
-
- 
+         end
+     end
 end
 
 

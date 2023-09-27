@@ -10,10 +10,8 @@ RSpec.describe Follower, type: :model do
       it 'should validate uniqueness of following and followee combination' do
 
         user = FactoryBot.create(:user)
-        
         user2 = FactoryBot.create(:user)
          
-      
         follow = FactoryBot.build(:follower, following: user,followee: user2)
         follow.save
       
@@ -28,7 +26,6 @@ RSpec.describe Follower, type: :model do
       
     end
     
-
 end
 
   describe 'scopes' do
@@ -42,13 +39,9 @@ end
        
         FactoryBot.create(:follower, following_id: user.id, followee_id: user2.id)
         FactoryBot.create(:follower, following_id: user.id, followee_id: user3.id)
-        
-     
         FactoryBot.create(:follower, following_id: user2.id,followee_id: user3.id)
         
-       
         count = Follower.count_following(user.id)
-        
       
         expect(count).to eq(2)
       end
@@ -62,14 +55,10 @@ end
        
         FactoryBot.create(:follower, following_id: user3.id, followee_id: user2.id)
         FactoryBot.create(:follower, following_id: user.id, followee_id: user2.id)
-        
-     
         FactoryBot.create(:follower, following_id: user2.id,followee_id: user3.id)
         
-       
         count = Follower.count_followee(user2.id)
         
-      
         expect(count).to eq(2)
   
          

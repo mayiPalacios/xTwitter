@@ -22,7 +22,7 @@ RSpec.describe Like, type: :model do
         
        
         expect(duplicate_like.errors[:base]).to include("you have already liked this tweet")
-      end
+       end
     end
    
   end
