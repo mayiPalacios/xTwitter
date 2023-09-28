@@ -4,12 +4,12 @@ Rails.application.routes.draw do
     resources :tweets, only: [:index]
   end
 
-  resources :users do
-    resources :tweets, only: [:new, :create, :update]
-  end
+  
+  resources :tweets, only: [:new, :create, :update]
+  
 
   resources :tweets do
-    resources :likes, only: [:new, :create, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
 
   resources :tweets do
@@ -27,13 +27,14 @@ Rails.application.routes.draw do
     resources :bookmarks, only: [:create, :destroy], on: :member
   end
 
-  resources :users do
-    get "tweets", on: :member, as: :tweets, defaults: { page: 1 }
+   resources :users, only:[:show] do
+    get "tweets(/page/:page)", on: :member, as: :tweets, :default => { per_page: 30}
+   get "tweets_and_replies", on: :member, as: :tweets_and_replies
   end
 
-  resources :users do
-    get "tweets_and_replies", on: :member, as: :tweets_and_replies, defaults: { page: 1 }
-  end
+  #get "/users/:id/tweets?per_page=#&&page=#", to: 'users#tweets'
+  
+  #get "/users/:id/tweets_and_replies?per_page=&&page=", to: 'users#tweets_and_replies'
 
   resources :tweets do
     get "stats", on: :member, as: :tweet_stats
