@@ -28,13 +28,9 @@ Rails.application.routes.draw do
   end
 
    resources :users, only:[:show] do
-    get "tweets(/page/:page)", on: :member, as: :tweets, :default => { per_page: 30}
+    get "tweets", on: :member, as: :tweets
    get "tweets_and_replies", on: :member, as: :tweets_and_replies
   end
-
-  #get "/users/:id/tweets?per_page=#&&page=#", to: 'users#tweets'
-  
-  #get "/users/:id/tweets_and_replies?per_page=&&page=", to: 'users#tweets_and_replies'
 
   resources :tweets do
     get "stats", on: :member, as: :tweet_stats
