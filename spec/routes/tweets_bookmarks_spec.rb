@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "TweetsBookmarks", type: :request do
+RSpec.describe "TweetsBookmarks", type: :routing do
   describe "POST /tweets/:id/bookmarks" do
     it "creates a new bookmark for a tweet" do
       expect(post("/tweets/2/bookmarks")).to route_to("bookmarks#create",tweet_id:"2")
