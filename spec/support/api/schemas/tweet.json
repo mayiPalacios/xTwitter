@@ -1,0 +1,33 @@
+{
+    "type": "object",
+    "required": ["tweet"],
+    "properties": {
+      "tweet": {
+        "type": "object",
+        "required": ["body", "user_id"],
+        "properties": {
+          "body": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "boolean"
+          },
+          "retweet": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user_id": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+  
