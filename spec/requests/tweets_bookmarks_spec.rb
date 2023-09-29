@@ -18,8 +18,6 @@ RSpec.describe "TweetsBookmarks", type: :request do
       user = create(:user)
       bookmark = create(:bookmark, user: user, tweet: tweet)
 
-      sign_in user
-
       delete tweet_bookmark_path(:bookmark,tweet)
 
       expect(response.status).to have_http_status(200)

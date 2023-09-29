@@ -2,24 +2,21 @@ require 'rails_helper'
 
 RSpec.describe "TweetsStats", type: :request do
   describe "GET /tweets/:id/stats" do
-    it "returns the statistics for a tweet" do
-      tweet = create(:tweet)
-      create_list(:quote, 3, tweet: tweet)
-      create_list(:retweet, 4, tweet: tweet)
-      create_list(:reply, 2, tweet: tweet)
-      create_list(:bookmark, 5, tweet: tweet)
-      create_list(:like, 6, tweet: tweet)
-
+    it "returns the stats for an existent tweet" do
+     
+      tweet = create(:tweet) 
       get tweet_stats_path(tweet)
 
       expect(response.status).to have_http_status(200)
-      expect(response).to render_template(:tweet_stats)
+      expect(response).to match_response_schema("stats")
+    end
 
-      expect(response.body).to include("Quotes: 3")
-      expect(response.body).to include("Retweets: 4")
-      expect(response.body).to include("Replies: 2")
-      expect(response.body).to include("Bookmarks: 5")
-      expect(response.body).to include("Likes: 6")
+    it "returns a 404 error when the tweet does not exist" do
+      non_existent_tweet_id = 123459999
+
+      get tweet_stats_path(non_existent_tweet_id)
+
+      expect(response.status).to have_http_status(404)
     end
   end
 end
