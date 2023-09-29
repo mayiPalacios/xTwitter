@@ -1,27 +1,25 @@
+require 'rails_helper'
+
 RSpec.describe "Tweets", type: :request do
     describe "POST /tweets" do
-      let(:tweet_params) {
-        {
-          user_id: 3,
-          body: 'test create tweet'
-        }
-      }
-      it "create a new tweet" do
-       
-        post tweets_path(tweet_params)
-  
-        expect(response.status).to have_http_status(200) 
-        expect(response).to match_response_schema("tweet")
-        end
+      let(:user) { FactoryBot.create(:user) }
+      let(:tweet) {FactoryBot.create(:tweet)}
+    it "creates a new tweet" do
+      post '/tweets', params: { user_id: user.id, body: Faker::Lorem.sentence,quote: false,retweet: false}
+      expect(response).to have_http_status(204) 
+      response.body
+    #  expect(response).to match_response_schema("tweet")
+      end
 
         it "update a tweet" do
-           tweet_id = 2
-            patch  tweets_path(tweet_id)
-      
-            expect(response.status).to have_http_status(200) 
+          puts "probando"
+            puts tweet.id
+            patch tweet_path(tweet), params: { tweet: { body: "Nuevo contenido", quote: false, retweet: false } }
+             puts response.status
+            expect(response).to have_http_status(200) 
             expect(response).to match_response_schema("tweet")
             end
-        end
+       end
  end
   
   

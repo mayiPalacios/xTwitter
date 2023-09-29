@@ -6,6 +6,9 @@
         "type": "object",
         "required": ["created_at", "updated_at", "user_id", "tweet_id", "body"],
         "properties": {
+          "id": {
+            "type": "integer"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time"

@@ -2,12 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "TweetsReplies", type: :request do
   describe "POST /tweets/:tweet_id/replies" do
+    let(:tweet) {FactoryBot.create(:tweet)}
+    let(:user) { FactoryBot.create(:user) }
     it "creates a new reply for a tweet" do
       tweet = create(:tweet)
 
-      post tweet_replies_path(tweet), params: { reply: { body: "A reply to the tweet" } }
-
-      expect(response.status).to have_http_status(200)
+      post "/tweets/#{tweet.id}/replies", params: { user_id: user.id, body: "testing"}
+      
+      expect(response).to have_http_status(201)
       expect(response).to match_response_schema("reply")
     end
   end

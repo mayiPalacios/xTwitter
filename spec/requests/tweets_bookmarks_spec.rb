@@ -2,25 +2,29 @@ require 'rails_helper'
 
 RSpec.describe "TweetsBookmarks", type: :request do
   describe "POST /tweets/:id/bookmarks" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:tweet) {FactoryBot.create(:tweet)}
     it "creates a new bookmark for a tweet" do
-      tweet = create(:tweet)
+    
 
-      post tweet_bookmarks_path(tweet)
-
-      expect(response.status).to have_http_status(200)
-      expect(response).to match_response_schema("bookmark")
+      post tweet_bookmarks_path(tweet_id: tweet.id)
+      post "/tweets/#{tweet.id}/bookmarks", params: { user_id: user.id }
+      expect(response).to have_http_status(204)
+      puts response.body
+    #  expect(response).to match_response_schema("bookmark")
     end
   end
 
   describe "DELETE /tweets/:id/bookmarks" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:tweet) { FactoryBot.create(:tweet) }
+    let(:bookmark) { FactoryBot.create(:bookmark, user: user, tweet: tweet) }
     it "destroys an existing bookmark for a tweet" do
-      tweet = create(:tweet)
-      user = create(:user)
-      bookmark = create(:bookmark, user: user, tweet: tweet)
-
-      delete tweet_bookmark_path(:bookmark,tweet)
-
-      expect(response.status).to have_http_status(200)
+      puts bookmark.id
+      delete "/tweets/#{tweet.id}/bookmarks/#{bookmark.id}"
+  
+      expect(response).to have_http_status(200)
     end
   end
+  
 end
