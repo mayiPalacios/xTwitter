@@ -43,11 +43,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_26_035724) do
   end
 
   create_table "replies", force: :cascade do |t|
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "tweet_id"
-    t.text "body"
   end
 
   create_table "tags", force: :cascade do |t|
