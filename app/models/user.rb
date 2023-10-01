@@ -4,12 +4,10 @@ class User < ApplicationRecord
     has_many :followees, class_name: 'Follower', foreign_key: 'followee_id'
     has_many :replies
     has_many :followings, class_name: 'Follower', foreign_key: 'following_id'
-    validates :email, uniqueness: true
-    validates :username, uniqueness: true
-    validate :password_presence_in_user
+    validates :email, uniqueness: true, presence: true
+    validates :username, uniqueness: true , presence: true
+    validates :password, presence: true
     validates :password, length: { minimum: 12 }
-    validate :email_presence_in_user
-    validate :username_presence_in_user
     validates :password, format: { with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@\/\*\-\+\_])[A-Za-z\d!@\/\*\-\+\_]{8,}\z/ , message: "invalid password"  }
     
 # En tu modelo User.rb

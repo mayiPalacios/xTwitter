@@ -1,6 +1,38 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  resources :users, only: [:show] do
+    resources :tweets, only: [:index]
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  
+  resources :tweets, only: [:new, :create, :update]
+  
+
+  resources :tweets do
+    resources :likes, only: [:create, :destroy]
+  end
+
+  resources :tweets do
+    member do
+      post "quote"
+      post "retweet"
+    end
+  end
+
+  resources :tweets do
+    resources :replies, only: [:create], param: :tweet_id
+  end
+
+  resources :tweets do
+    resources :bookmarks, only: [:create, :destroy], on: :member
+  end
+
+   resources :users, only:[:show] do
+    get "tweets", on: :member, as: :tweets
+   get "tweets_and_replies", on: :member, as: :tweets_and_replies
+  end
+
+  resources :tweets do
+    get "stats", on: :member, as: :tweet_stats
+  end
 end

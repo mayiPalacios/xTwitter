@@ -1,7 +1,6 @@
 class Tweet < ApplicationRecord
   belongs_to :user
   has_many :likes
-  has_many :tweets
   has_many :bookmarks
   has_many :tags
   has_many :replies
@@ -24,19 +23,19 @@ class Tweet < ApplicationRecord
     ])
   }
   
-  scope :tweet_by_user, ->(user_id){
-    where(user_id: user)
+  scope :tweet_by_user, ->(user_id){#
+    where(user_id: user_id)
   }
   
-  scope :tweets_and_replies_by_user, ->(user_id){
-    where(user_id: user_id).or(where(id: Replie.where(user_id: user_id).select(:tweet_id)))
+  scope :tweets_and_replies_by_user, ->(user_id){ #
+    where(user_id: user_id).or(where(id: Reply.where(user_id: user_id).select(:tweet_id)))
   }
 
-  scope :count_quotes, -> (user_id){
+  scope :count_quotes, -> (user_id){ #
     where(user_id: user_id, retweet: false, quote: true).count
   }
 
-  scope :count_retweet, -> (user_id){
+  scope :count_retweet, -> (user_id){#
     where(user_id: user_id, retweet: true, quote: false).count
   }
 
@@ -68,20 +67,46 @@ class Tweet < ApplicationRecord
   def retweet_method(user_id)
 
   retweet = Tweet.new(quote: false,retweet: true,user_id: user_id);
-  retweet.save!
- 
+
+ if retweet.save!
+  return "saved it"
+end
   end
 
 #QuoteTweet: Create a method that encapsulates 
-#the retweet logic accepting a user an a text 
+#the quote logic accepting a user an a text 
 #body as parameter
 
 
   def quote_method(user_id,body)
 
     quote = Tweet.new( body: body,quote: true, retweet: false,user_id: user_id);
-    quote.save!
+
+    if quote.save!
+      return "saved it"
+    end
    
+    end
+
+    #steps
+    #tweet = Tweet.new(body: "this is a example #naruto.",user_id: 2)
+    #tweet.create_hashtags_from_body
+
+    def create_hashtags_from_body
+      body.scan(/#\w+/).each do |hashtag_text|
+        hashtag_name = hashtag_text[1..-1]  
+        
+        
+        hashtag = Hashtag.find_or_initialize_by(hashtag_name: hashtag_name)
+        
+        unless Hashtag.exists?(hashtag_name: hashtag_name)
+          tag = tags.build(hashtag: hashtag)  
+          tag.save  
+          hashtag.save  
+          return "Saved it"  
+        end
+        return "this hashtag has already been created"
+      end
     end
 
 
@@ -105,5 +130,7 @@ def body_nil_for_retweet
      errors.add(:body, "must contain nil content f0r retweets")
   end
 end
+
+
 
 end

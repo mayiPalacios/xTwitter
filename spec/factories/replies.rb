@@ -1,5 +1,7 @@
 FactoryBot.define do
-  factory :replie do
-    reply_text { "MyText" }
+  factory :reply do
+    body { Faker::Lorem.sentence }
+    user { association :user } 
+    tweet {association :tweet}
   end
 end

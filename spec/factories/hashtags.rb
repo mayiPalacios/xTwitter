@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :hashtag do
-    hashtag_name { "MyString" }
-    body { "MyText" }
+    hashtag_name { Faker::Lorem.word } 
+    body { Faker::Lorem.sentence } 
   end
 end
