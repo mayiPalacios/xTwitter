@@ -6,9 +6,9 @@ RSpec.describe "Tweets", type: :request do
       let(:tweet) {FactoryBot.create(:tweet)}
     it "creates a new tweet" do
       post '/tweets', params: { user_id: user.id, body: Faker::Lorem.sentence,quote: false,retweet: false}
-      expect(response).to have_http_status(204) 
+      expect(response).to have_http_status(201) 
       response.body
-    #  expect(response).to match_response_schema("tweet")
+      expect(response).to match_response_schema("tweet")
       end
 
         it "update a tweet" do

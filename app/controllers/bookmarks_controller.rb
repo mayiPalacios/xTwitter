@@ -1,21 +1,28 @@
 class BookmarksController < ApplicationController
-    before_action :set_tweet, only: [:create]
+  
   
     def create
-      tweet_id = params[:id]
+      tweet_id = params[:tweet_id]
       user_id = params[:user_id]
   
       if @tweet
         @bookmark = Bookmark.new(tweet_id: tweet_id, user_id: user_id)
         
+      #  @bookmark.save
+       #     render json: { bookmark: @bookmark }, status: :ok 
+        #  end
         if @bookmark.save
-            render json: { bookmark: @bookmark }, status: :ok 
-          end
-      end
-    end
+          render json: { bookmark: @bookmark }, status: :created
+        else
+          render json: { errors: @bookmark.errors.full_messages }, status: :unprocessable_entity
+        end
 
    
-    
+    end
+
+  end
+  
+  before_action :set_tweet, only: [:create]
     def destroy
         id = params[:id]
 
