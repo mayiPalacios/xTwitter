@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  get 'tweets/create'
+  get 'tweets/update'
   
   resources :users, only: [:show] do
     resources :tweets, only: [:index]
   end
 
   
-  resources :tweets, only: [:new, :create, :update]
+  resources :tweets, only: [:new,:create,:update,:index,:show], defaults: { format: :json }
   
 
   resources :tweets do
@@ -24,10 +26,11 @@ Rails.application.routes.draw do
   end
 
   resources :tweets do
-    resources :bookmarks, only: [:create, :destroy], on: :member
+    resources :bookmarks, only: [:create, :destroy], defaults: { format: :json }
   end
+  
 
-   resources :users, only:[:show] do
+   resources :users, only:[:show,:index] do
     get "tweets", on: :member, as: :tweets
    get "tweets_and_replies", on: :member, as: :tweets_and_replies
   end

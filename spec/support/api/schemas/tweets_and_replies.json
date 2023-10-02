@@ -1,0 +1,34 @@
+{
+    "type": "object",
+    "required": ["tweets", "replies", "pagination"],
+    "properties": {
+      "tweets": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer" },
+            "body": { "type": "string" },
+            "quote": { "type": "boolean" },
+            "retweet": { "type": "boolean" },
+            "created_at": { "type": "string", "format": "date-time" },
+            "user_id": { "type": "integer" }
+          }
+        }
+      },
+      "replies": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer" },
+            "body": { "type": "string" },
+            "created_at": { "type": "string", "format": "date-time" },
+            "user_id": { "type": "integer" },
+            "tweet_id": { "type": "integer" }
+          }
+        }
+      }
+    }
+  }
+  

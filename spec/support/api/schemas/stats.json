@@ -1,0 +1,12 @@
+{
+    "type": "object",
+    "required": ["quoted_count", "retweeted_count", "replied_count", "bookmarked_count", "liked_count"],
+    "properties": {
+      "quoted_count": { "type": "integer" },
+      "retweeted_count": { "type": "integer" },
+      "replied_count": { "type": "integer" },
+      "bookmarked_count": { "type": "integer" },
+      "liked_count": { "type": "integer" }
+    }
+  }
+  
