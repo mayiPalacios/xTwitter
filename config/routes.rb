@@ -26,11 +26,11 @@ Rails.application.routes.draw do
   end
 
   resources :tweets do
-    resources :bookmarks, only: [:create, :destroy], on: :member, defaults: { format: :json }
+    resources :bookmarks, only: [:create, :destroy], defaults: { format: :json }
   end
   
 
-   resources :users, only:[:show] do
+   resources :users, only:[:show,:index] do
     get "tweets", on: :member, as: :tweets
    get "tweets_and_replies", on: :member, as: :tweets_and_replies
   end

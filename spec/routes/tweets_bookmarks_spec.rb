@@ -1,15 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "TweetsBookmarks", type: :routing do
-  describe "POST /tweets/:id/bookmarks" do
-    it "creates a new bookmark for a tweet" do
-      expect(post("/tweets/2/bookmarks")).to route_to("bookmarks#create",tweet_id:"2")
+  describe "POST /tweets/:tweet_id/bookmarks" do
+    it "routes to bookmarks#create" do
+      expect(post("/tweets/2/bookmarks.json")).to route_to(
+        controller: "bookmarks",
+        action: "create",
+        tweet_id: "2",
+        format: "json"
+      )
     end
   end
 
-  describe "DELETE /tweets/:id/bookmarks" do
-    it "destroys an existing bookmark f0r a tweet" do
-      expect(post("/tweets/2/bookmarks/1")).to route_to("bookmarks#destroy",tweet_id:"2",id:"1")
+  describe "DELETE /tweets/:tweet_id/bookmarks/:id" do
+    it "routes to bookmarks#destroy" do
+      expect(delete("/tweets/2/bookmarks/1.json")).to route_to(
+        controller: "bookmarks",
+        action: "destroy",
+        tweet_id: "2",
+        id: "1",
+        format: "json"
+      )
     end
   end
 end
