@@ -3,14 +3,27 @@ require 'rails_helper'
 
 RSpec.describe "TweetsActions", type: :routing do
   describe "POST /tweets/:id/quote" do
-    it("creates a new quoted tweet succesfully ") do
-      expect(post("/tweets/2/quote")).to route_to("tweets#quote",id: "2")
+    it "routes to tweets#quote" do
+      expect(post("/tweets/2/quote.json")).to route_to(
+        controller: "tweets",
+        action: "quote",
+        id: "2",
+        "format" => "json" 
+      )
     end
   end
 
   describe "POST /tweets/:id/retweet" do
-    it "creates a new retweet" do
-      expect(post("/tweets/2/retweet")).to route_to("tweets#retweet",id:"2")
+    it "routes to tweets#retweet" do
+      expect(post("/tweets/2/retweet.json")).to route_to(
+        controller: "tweets",
+        action: "retweet",
+        id: "2",
+        "format" => "json" 
+      )
     end
   end
 end
+
+
+

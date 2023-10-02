@@ -12,7 +12,8 @@
             "quote": { "type": "boolean" },
             "retweet": { "type": "boolean" },
             "created_at": { "type": "string", "format": "date-time" },
-            "user_id": { "type": "integer" }
+            "user_id": { "type": "integer" },
+            "interaction_reference":  { "type": ["integer", "null"] }
           }
         }
       },

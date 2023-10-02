@@ -16,8 +16,8 @@ Rails.application.routes.draw do
 
   resources :tweets do
     member do
-      post "quote"
-      post "retweet"
+      post "quote", defaults: { format: :json }
+      post "retweet",  defaults: { format: :json }
     end
   end
 

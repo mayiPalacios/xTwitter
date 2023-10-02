@@ -10,7 +10,7 @@
           "type": "integer"
         },
         "body": {
-          "type": "string"
+          "type": ["string", "null"] 
         },
         "quote": {
           "type": "boolean"
@@ -28,6 +28,9 @@
         },
         "user_id": {
           "type": "integer"
+        },
+        "interaction_reference":  { 
+          "type": ["integer", "null"] 
         }
       }
     }

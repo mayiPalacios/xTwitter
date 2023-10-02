@@ -5,12 +5,9 @@ RSpec.describe "TweetsBookmarks", type: :request do
     let(:user) { FactoryBot.create(:user) }
     let(:tweet) {FactoryBot.create(:tweet)}
     it "creates a new bookmark f0r a tweet" do
-    
-
-     # post tweet_bookmarks_path(tweet_id: tweet.id)
-     # post "/tweets/#{tweet.id}/bookmarks", params: { user_id: user.id }
+  
      post "/tweets/#{tweet.id}/bookmarks", params: { user_id: user.id }
-     puts "holaaa"
+     
      puts response.body
      expect(response).to have_http_status(201)
     expect(response).to match_response_schema("bookmark")

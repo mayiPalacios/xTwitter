@@ -4,5 +4,6 @@ FactoryBot.define do
     user { association :user } 
     quote { false }
     retweet { false }
+    interaction_reference { Faker::Number }
   end
 end
