@@ -16,14 +16,14 @@ namespace :api, defaults: { format: :json } do
     get "stats", on: :member, as: :tweet_stats
   end
   
+ 
+    resources :tweets do
+      resources :likes, only: [:create, :destroy]
+    end
 
-   resources :tweets do
-     resources :likes, only: [:create, :destroy]
-   end
-
-   resources :tweets do
-    resources :replies, only: [:create], param: :tweet_id
-  end
+      resources :tweets do
+      resources :replies, only: [:create], param: :tweet_id
+    end
 
 end
 

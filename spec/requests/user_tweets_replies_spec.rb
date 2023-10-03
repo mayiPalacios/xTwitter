@@ -1,4 +1,3 @@
-# spec/requests/users_tweets_and_replies_spec.rb
 require 'rails_helper'
 
 RSpec.describe "UsersTweetsReplies", type: :request do
