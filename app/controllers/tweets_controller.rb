@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-
+  include TweetStatsModule
   def create
        user_id = params[:user_id]
        body = params[:body]
@@ -14,6 +14,15 @@ class TweetsController < ApplicationController
          end
        end
 
+  end
+
+  def index
+    user_id = params[:user_id]
+
+    user = User.find(params[:user_id])
+    @tweets = user.tweets.paginate(page: params[:page], per_page: 2) 
+
+    render json: @tweets, status: :ok
   end
   
   
@@ -76,6 +85,5 @@ class TweetsController < ApplicationController
     params.require(:tweet).permit(:body, :quote, :retweet)
   end
 
-  def index 
-  end
+  
 end

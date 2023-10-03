@@ -6,18 +6,18 @@ module TweetStatsModule
   included do
     before_action :set_tweet
   end
- def get_Stats()
+ def stats()
     
      id = params[:id]
 
-      @result = { 
-       quote : self.quoted(id)
-       retweet : self.retweeted(id)
-       reply : self.replied(id)
-       bookmark : self.bookmarked(id)
-       like : self.liked(id)
-      }
-
+     @result = { 
+      quote: self.quoted(id),
+      retweet: self.retweeted(id),
+      reply: self.replied(id),
+      bookmark: self.bookmarked(id),
+      like: self.liked(id)
+    }
+    
       
  
  end

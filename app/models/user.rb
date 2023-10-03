@@ -86,7 +86,14 @@ scope :create_sample_users, -> {
     ])
   }
   
- 
+  def tweets_and_replies(page, per_page)
+    tweets = Tweet.where(user_id: id)
+    replies = Reply.where(user_id: id)
+    combined = (tweets + replies).sort_by(&:created_at).reverse
+    WillPaginate::Collection.create(page, per_page, combined.length) do |pager|
+      pager.replace(combined[pager.offset, pager.per_page].to_a)
+    end
+  end
 
     private 
     

@@ -6,37 +6,13 @@ class UsersController < ApplicationController
 
         def tweets_and_replies
           
-         user_id = params[:id]
-         page = params[:page]
-         per_page = params[:per_page]
-              
-       @tweets =  Tweet.where(user_id: user_id)
-       @replies = Reply.where(user_id: user_id)
-       
-        
-        
-        @tweets_and_replies = (@tweets + @replies).order(created_at: :desc).page(page).per(per_page)
-        
+          user = User.find(params[:id])
+          page = params[:page] || 1
+          per_page = params[:per_page] || 5 
+          tweets_and_replies = user.tweets_and_replies(page, per_page)
 
-
-          # @tweets_and_replies = (@tweets + @replies).page(page).per(per_page)
-     
-       # @tweets_and_replies = Tweet.where(user_id: user_id).or(Reply.where(user_id: user_id)).order(created_at: :desc).paginate(page: page, per_page: per_page)
-        # @tweets_and_replies = Tweet.tweets_and_replies_by_user(user_id).page(page).per(per_page)
-       #  @count_tweets_replies = Tweet.tweets_and_replies_by_user(user_id).count
-
-         
-        # response_data = {
-         #  tweets_and_replies: @tweets_and_replies,
-           # pagination: {
-            #  page: page,
-        #      per_page: per_page,
-        #      total_elements: @count_tweets_replies
-         #   }
-        #  }
-
-          render json: @tweets_and_replies,status: :ok
-
+          render json: tweets_and_replies, status: :ok
+          
         end
 
  private 
