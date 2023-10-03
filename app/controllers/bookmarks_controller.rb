@@ -1,4 +1,4 @@
-class BookmarksController < ApplicationController
+class  BookmarksController < ApplicationController
   
   
     def create
@@ -7,10 +7,8 @@ class BookmarksController < ApplicationController
   
       if @tweet
         @bookmark = Bookmark.new(tweet_id: tweet_id, user_id: user_id)
+      
         
-      #  @bookmark.save
-       #     render json: { bookmark: @bookmark }, status: :ok 
-        #  end
         if @bookmark.save
           render json: { bookmark: @bookmark }, status: :created
         else

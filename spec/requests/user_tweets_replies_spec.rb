@@ -13,8 +13,8 @@ RSpec.describe "UsersTweetsReplies", type: :request do
       get "/users/#{user.id}/tweets_and_replies?page=2&per_page=3"
        
       puts response.body
-      expect(response).to have_http_status(200)
-    
+      expect(response).to have_http_status(201)
+      expect(response).to match_response_schema("tweets_and_replies")
     end
   end
 end

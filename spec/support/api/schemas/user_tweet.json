@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "required": ["tweet"],
+    "properties": {
+      "tweet": {
+        "type": "array",
+        "required": ["id", "body", "user_id"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "body": {
+            "type": ["string", "null"] 
+          },
+          "quote": {
+            "type": "boolean"
+          },
+          "retweet": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "interaction_reference":  { 
+            "type": ["integer", "null"] 
+          }
+        }
+      }
+    }
+  }

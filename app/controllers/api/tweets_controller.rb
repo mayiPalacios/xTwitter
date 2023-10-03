@@ -1,5 +1,4 @@
-class TweetsController < ApplicationController
-  include TweetStatsModule
+class Api::TweetsController < ApplicationController
     def create
         user_id = params[:user_id]
         body = params[:body]
@@ -8,26 +7,21 @@ class TweetsController < ApplicationController
    
         @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet)
    
-        respond_to do |format|
+     
           if @tweet.save
-             format.json { render json: { tweet: @tweet }, status: :created }
+            render :create, status: :created
           end
-        end
+        
  
-    end
+   end
  
-  def index
-        user_id = params[:user_id]
+   def index
+     user_id = params[:user_id]
  
-        user = User.find(params[:user_id])
-        @tweets = user.tweets.paginate(page: params[:page], per_page: 2) 
-
-        respond_to do |format|
-          if @tweets
-          format.json { render json: { tweet: @tweets }, status: :created }
-          end
-       end
-    
+     user = User.find(params[:user_id])
+     @tweets = user.tweets.paginate(page: params[:page], per_page: 2) 
+ 
+     render :index, status: :ok
    end
    
    
@@ -35,7 +29,7 @@ class TweetsController < ApplicationController
    
    def update
          if @tweet.update(tweet_params)
-            render json: { tweet: @tweet }, status: :ok
+            render :update, status: :ok
          else
             render json: { errors: @tweet.errors.full_messages }, status: :unprocessable_entity
          end
@@ -49,13 +43,13 @@ class TweetsController < ApplicationController
      
      @tweet = Tweet.new(user_id: user_id, body: body, quote: true, retweet: false,interaction_reference: tweet_id)
      
-     respond_to do |format|
+     
            if @tweet.save
-             format.json { render json: { tweet: @tweet }, status: :created }
+            render :quote, status: :created
           else
-             format.json { render json: @tweet.errors, status: :unprocessable_entity }
+            render json: { errors: @tweet.errors.full_messages }, status: :unprocessable_entity
           end
-      end
+     
   
    end
  
@@ -67,13 +61,13 @@ class TweetsController < ApplicationController
  
         @tweet = Tweet.new(user_id: user_id, body: nil, quote: false, retweet: true,interaction_reference: tweet_id)
      
-        respond_to do |format|
+      
             if @tweet.save
-              format.json { render json: { tweet: @tweet }, status: :created }
+              render :retweet, status: :created
             else
                  format.json { render json: @tweet.errors, status: :unprocessable_entity }
             end
-        end
+        
     
    end
  
@@ -88,5 +82,5 @@ class TweetsController < ApplicationController
      params.require(:tweet).permit(:body, :quote, :retweet)
    end
  
-  
+
 end
