@@ -1,4 +1,4 @@
-class Api::TweetsController < ApplicationController
+class Api::TweetsController < ApiController
     def create
         user_id = params[:user_id]
         body = params[:body]

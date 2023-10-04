@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :jwt_authenticatable
     has_many :bookmarks 
     has_many :tweets  
     has_many :followees, class_name: 'Follower', foreign_key: 'followee_id'

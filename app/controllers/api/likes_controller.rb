@@ -1,4 +1,4 @@
-class Api::LikesController < ApplicationController
+class Api::LikesController < ApiController
 
     before_action :set_tweet
 

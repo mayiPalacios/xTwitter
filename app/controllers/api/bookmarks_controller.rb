@@ -1,4 +1,4 @@
-class Api::BookmarksController < ApplicationController
+class Api::BookmarksController < ApiController
 
     def create
         tweet_id = params[:tweet_id]

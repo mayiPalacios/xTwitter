@@ -1,4 +1,4 @@
-class Api::RepliesController < ApplicationController
+class Api::RepliesController < ApiController
 
     def create
         tweet = Tweet.find(params[:tweet_id])

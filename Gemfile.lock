@@ -264,6 +264,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  devise-jwt
   dotenv-rails
   factory_bot_rails
   faker (~> 2.18)

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  #get 'tweets/create'
-  #get 'tweets/update'
   
+
 namespace :api, defaults: { format: :json } do
 
   resources :users, only: [:show, :index] do
@@ -27,28 +26,34 @@ namespace :api, defaults: { format: :json } do
 
 end
 
-    resources :users, only: [:show, :index], defaults: { format: :json } do
-       resources :tweets, only: [:index]
-       get "tweets_and_replies", on: :member, as: :tweets_and_replies
-    end
 
-    resources :tweets, only: [:new, :create, :update, :index, :show], defaults: { format: :json } do
-       post "quote", defaults: { format: :json }, on: :member
-       post "retweet", defaults: { format: :json }, on: :member
-       resources :bookmarks, only: [:create, :destroy], defaults: { format: :json }
-       get "stats", on: :member, as: :tweet_stats
-    end
+namespace :web   do
 
+  resources :users, only: [:show, :index], defaults: { format: :json } do
+    resources :tweets, only: [:index]
+    get "tweets_and_replies", on: :member, as: :tweets_and_replies
+ end
 
-    resources :tweets do
-       resources :likes, only: [:create, :destroy]
-    end
-
-     resources :tweets do
-       resources :replies, only: [:create], param: :tweet_id
-     end
+ resources :tweets, only: [:new, :create, :update, :index, :show], defaults: { format: :json } do
+    post "quote", defaults: { format: :json }, on: :member
+    post "retweet", defaults: { format: :json }, on: :member
+    resources :bookmarks, only: [:create, :destroy], defaults: { format: :json }
+    get "stats", on: :member, as: :tweet_stats
+ end
 
 
+ resources :tweets do
+    resources :likes, only: [:create, :destroy]
+ end
+
+  resources :tweets do
+    resources :replies, only: [:create], param: :tweet_id
+  end
+
+end
+
+
+ 
   # resources :tweets do
   #   member do
   #     post "quote", defaults: { format: :json }
