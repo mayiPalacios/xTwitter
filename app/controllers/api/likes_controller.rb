@@ -1,5 +1,5 @@
 class Api::LikesController < ApiController
-
+  skip_before_action :authenticate_user!
     before_action :set_tweet
 
     def create

@@ -5,10 +5,10 @@ RSpec.describe "Tweets", type: :request do
       let(:user) { FactoryBot.create(:user) }
       let(:tweet) {FactoryBot.create(:tweet)}
     it "creates a new tweet" do
-      post '/tweets', params: { user_id: user.id, body: Faker::Lorem.sentence,quote: false,retweet: false}
-      
+      post '/api/tweets', params: { user_id: user.id, body: Faker::Lorem.sentence,quote: false,retweet: false}
+      puts response.body
       expect(response).to have_http_status(201) 
-      response.body
+     
       expect(response).to match_response_schema("tweet")
      end
 

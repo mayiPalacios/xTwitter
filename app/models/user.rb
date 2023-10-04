@@ -1,6 +1,10 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :jwt_authenticatable
+         :recoverable, :rememberable, :validatable
+
     has_many :bookmarks 
     has_many :tweets  
     has_many :followees, class_name: 'Follower', foreign_key: 'followee_id'
@@ -18,70 +22,70 @@ scope :create_sample_users, -> {
       { 
         name: "Usuario 1",
         email: "usuario1@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user1",
         lastname: "Apellido1"
       },
       { 
         name: "Usuario 2",
         email: "usuario2@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user2",
         lastname: "Apellido2"
       },
       { 
         name: "Usuario 3",
         email: "usuario3@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user3",
         lastname: "Apellido3"
       },
       { 
         name: "Usuario 4",
         email: "usuario4@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user4",
         lastname: "Apellido4"
       },
       { 
         name: "Usuario 5",
         email: "usuario5@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user5",
         lastname: "Apellido5"
       },
       { 
         name: "Usuario 6",
         email: "usuario6@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user6",
         lastname: "Apellido6"
       },
       { 
         name: "Usuario 7",
         email: "usuario7@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user7",
         lastname: "Apellido7"
       },
       { 
         name: "Usuario 8",
         email: "usuario8@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user8",
         lastname: "Apellido8"
       },
       { 
         name: "Usuario 9",
         email: "usuario9@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user9",
         lastname: "Apellido9"
       },
       { 
         name: "Usuario 10",
         email: "usuario10@example.com",
-        password: "Password123@",
+        password: "Maria@1234_jjj",
         username: "user10",
         lastname: "Apellido10"
       }

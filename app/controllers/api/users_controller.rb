@@ -1,5 +1,5 @@
 class Api::UsersController < ApiController
-
+    
    def create
       @user = FactoryBot.create(:user)
       render_to_json(@user)

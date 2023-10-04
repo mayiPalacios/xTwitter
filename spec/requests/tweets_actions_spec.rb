@@ -7,11 +7,13 @@ RSpec.describe "TweetsActions", type: :request do
     it "creates a new quoted tweet" do
       tweet.save!
       user.save!
- 
-     post "/tweets/#{tweet.id}/quote", params: { user_id: user.id, body: Faker::Lorem.sentence}
-        
+      
+     post "/api/tweets/#{tweet.id}/quote", params: { user_id: user.id, body: Faker::Lorem.sentence}
+     
+      puts response.body
       expect(response).to have_http_status(201)
       expect(response).to match_response_schema("tweet")
+      
     end
 
   end

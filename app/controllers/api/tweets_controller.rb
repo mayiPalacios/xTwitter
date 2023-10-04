@@ -1,4 +1,5 @@
 class Api::TweetsController < ApiController
+  
     def create
         user_id = params[:user_id]
         body = params[:body]
@@ -12,7 +13,6 @@ class Api::TweetsController < ApiController
             render :create, status: :created
           end
         
- 
    end
  
    def index
@@ -42,15 +42,12 @@ class Api::TweetsController < ApiController
      body = params[:body]
      
      @tweet = Tweet.new(user_id: user_id, body: body, quote: true, retweet: false,interaction_reference: tweet_id)
-     
-     
-           if @tweet.save
-            render :quote, status: :created
-          else
-            render json: { errors: @tweet.errors.full_messages }, status: :unprocessable_entity
-          end
-     
   
+           if @tweet.save  
+            render status: :created
+        #  else
+         #   render json: { errors: @tweet.errors.full_messages }, status: :unprocessable_entity
+          end
    end
  
  
@@ -69,6 +66,13 @@ class Api::TweetsController < ApiController
             end
         
     
+   end
+
+   def show 
+    @tweet = Tweet.find(params[:id])
+     
+    render  status: :created
+        
    end
  
  

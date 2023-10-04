@@ -6,11 +6,11 @@ RSpec.describe "TweetsBookmarks", type: :request do
     let(:tweet) {FactoryBot.create(:tweet)}
     it "creates a new bookmark f0r a tweet" do
   
-     post "/tweets/#{tweet.id}/bookmarks", params: { user_id: user.id }
+     post "/api/tweets/#{tweet.id}/bookmarks", params: { user_id: user.id }
      
      puts response.body
      expect(response).to have_http_status(201)
-    expect(response).to match_response_schema("bookmark")
+     expect(response).to match_response_schema("bookmark")
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe "TweetsBookmarks", type: :request do
     let(:bookmark) { FactoryBot.create(:bookmark, user: user, tweet: tweet) }
     it "destroys an existing bookmark for a tweet" do
       puts bookmark.id
-      delete "/tweets/#{tweet.id}/bookmarks/#{bookmark.id}"
+      delete "/api/tweets/#{tweet.id}/bookmarks/#{bookmark.id}"
   
       expect(response).to have_http_status(200)
     end

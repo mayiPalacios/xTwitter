@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   
 
 namespace :api, defaults: { format: :json } do
@@ -11,7 +12,7 @@ namespace :api, defaults: { format: :json } do
   resources :tweets, only: [:new, :create, :update, :index, :show] do
     post "quote", on: :member
     post "retweet",  on: :member
-    resources :bookmarks, only: [:create, :destroy]
+    resources :bookmarks, only: [:create, :destroy, :show]
     get "stats", on: :member, as: :tweet_stats
   end
   
@@ -27,7 +28,7 @@ namespace :api, defaults: { format: :json } do
 end
 
 
-namespace :web   do
+
 
   resources :users, only: [:show, :index], defaults: { format: :json } do
     resources :tweets, only: [:index]
@@ -50,7 +51,6 @@ namespace :web   do
     resources :replies, only: [:create], param: :tweet_id
   end
 
-end
 
 
  

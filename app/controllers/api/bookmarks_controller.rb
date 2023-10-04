@@ -1,4 +1,5 @@
 class Api::BookmarksController < ApiController
+  skip_before_action :authenticate_user!
 
     def create
         tweet_id = params[:tweet_id]
@@ -15,8 +16,18 @@ class Api::BookmarksController < ApiController
           end
   
      
-      end
+        end
   
+    end
+
+    def show 
+      @bookmark = Bookmark.find(params[:id]) 
+       
+      respond_to do |format|
+        #format.html
+        format.json {render json: @bookmark}
+     end
+
     end
     
     before_action :set_tweet, only: [:create]
