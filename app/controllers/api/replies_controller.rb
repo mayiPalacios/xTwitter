@@ -1,5 +1,5 @@
 class Api::RepliesController < ApiController
-  skip_before_action :authenticate_user!
+  
     def create
         tweet = Tweet.find(params[:tweet_id])
   

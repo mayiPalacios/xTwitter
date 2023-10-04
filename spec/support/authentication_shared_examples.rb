@@ -4,8 +4,7 @@ RSpec.shared_examples "user authentication" do
       action.call
 
       expect(response).to have_http_status(401)
-
-     
+      
     end
   end
 end
