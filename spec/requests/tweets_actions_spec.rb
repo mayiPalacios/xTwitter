@@ -1,22 +1,31 @@
 require 'rails_helper'
+require_relative '../support/authentication_shared_examples'
+
+
 
 RSpec.describe "TweetsActions", type: :request do
-  describe "POST /tweets/:id/quote" do
-    let(:tweet) {FactoryBot.create(:tweet)}
-    let(:user) { FactoryBot.create(:user) }
-    it "creates a new quoted tweet" do
-      tweet.save!
-      user.save!
-      
-     post "/api/tweets/#{tweet.id}/quote", params: { user_id: user.id, body: Faker::Lorem.sentence}
-     
-      puts response.body
-      expect(response).to have_http_status(201)
-      expect(response).to match_response_schema("tweet")
-      
-    end
+  
 
+  describe "POST /tweets/:id/quote" do
+    let(:tweet) { FactoryBot.create(:tweet) }
+    let(:user) { FactoryBot.create(:user) }
+   
+    it_behaves_like "user authentication" do
+      let(:action) { -> { post "/api/tweets/#{tweet.id}/quote", params: { user_id: user.id, body: Faker::Lorem.sentence } } }
+    end
+  
+         it "creates a new quoted tweet" do
+
+             token = JsonWebToken.encode({sub: user.id})
+             post "/api/tweets/#{tweet.id}/quote", params: { user_id: user.id, body: Faker::Lorem.sentence }, headers: { "Authorization" => "Bearer #{token}" }
+           
+             puts response.body
+             expect(response).to have_http_status(201)
+             expect(response).to match_response_schema("tweet")
+         end
   end
+  
+  
 
   describe "POST /tweets/:id/retweet" do
     let(:tweet) {FactoryBot.create(:tweet)}
