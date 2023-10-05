@@ -1,38 +1,40 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "required": ["tweet"],
   "properties": {
-    "tweet": {
-      "type": "object",
-      "required": ["id", "body", "user_id"],
-      "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "body": {
-          "type": ["string", "null"] 
-        },
-        "quote": {
-          "type": "boolean"
-        },
-        "retweet": {
-          "type": "boolean"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "updated_at": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "user_id": {
-          "type": "integer"
-        },
-        "interaction_reference":  { 
-          "type": ["integer", "null"] 
-        }
-      }
+    "id": {
+      "type": "integer"
+    },
+    "body": {
+      "type": "string"
+    },
+    "quote": {
+      "type": "boolean"
+    },
+    "retweet": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "integer"
+    },
+    "interaction_reference": {
+      "type": "null"
     }
-  }
+  },
+  "required": [
+    "id",
+    "body",
+    "quote",
+    "retweet",
+    "created_at",
+    "updated_at",
+    "user_id",
+    "interaction_reference"
+  ]
 }
