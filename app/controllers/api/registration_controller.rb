@@ -27,8 +27,4 @@ class Api::RegistrationController < ApiController
 
   end
   
-  
-  
-
-  
 end
