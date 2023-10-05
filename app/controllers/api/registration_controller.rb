@@ -19,7 +19,7 @@ class Api::RegistrationController < ApiController
   
     @user.save!
     if @user
-      token = create_token(@user.email, password)
+      token = create_token(@user.email, password) 
       render json: { user: @user, token: token }, status: :created
     else
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity

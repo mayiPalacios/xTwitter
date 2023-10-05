@@ -1,26 +1,20 @@
-class API::SessionsController < ApiController
+class Api::SessionsController < ApiController
   skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
-  
-    def new 
-         @user = User.new
+    include CreateToken
+    
+    def create 
+      email = params[:email]
+      password = params[:password]
+
+      token = create_token(email, password)
+      render json: {  token: token }, status: :created
     end
 
-    def create
-      @user = User.find_by(email: user_params[:email])
-
-      if @user && @user.password == user_params[:password]
-        
-      else 
-       
-    end
-
-end
-
-private 
-
-def user_params
-      params.require(:user).permit(:email,:password)
-end
+     def destroy
+       token = params[:token]
+       invalid_token = destroy_token(token)      
+       render json: {  invalid_token: invalid_token }, status: :created
+     end
 
 end

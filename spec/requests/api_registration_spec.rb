@@ -1,5 +1,3 @@
-
-
 require 'rails_helper'
 
 RSpec.describe 'API Registration', type: :request do
