@@ -5,6 +5,7 @@ RSpec.describe 'Sessions', type: :request do
 
   describe 'POST /api/sign_in' do
     let(:user) { FactoryBot.create(:user) }
+    
        it 'log in and return a valid JWT token' do
          user.save!
          get '/api/sign_in', params: { email: user.email, password: "Maria@1234_jjj" }

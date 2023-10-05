@@ -12,20 +12,20 @@ class UsersController < ApplicationController
     @tweets_and_replies = user.tweets_and_replies(page, per_page)
   
     respond_to do |format|
-      if @tweets_and_replies
-        format.json {
-          render json: {
-            tweets: @tweets_and_replies[:tweets],
-            replies: @tweets_and_replies[:replies],
-            pagination: {
-              page: page,
-              per_page: per_page
-            }
-          },
-          status: :created
-        }
-      end
-    end
+        if @tweets_and_replies
+          format.json {
+             render json: {
+              tweets: @tweets_and_replies[:tweets],
+              replies: @tweets_and_replies[:replies],
+              pagination: {
+               page: page,
+               per_page: per_page
+              }
+             },
+             status: :created
+          }
+          end
+       end
   end
   
 

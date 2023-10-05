@@ -10,32 +10,32 @@ namespace :api, defaults: { format: :json } do
    
 
 
-  resources :users, only: [:show, :index] do
-    resources :tweets, only: [:index]
-    get "tweets_and_replies", on: :member, as: :tweets_and_replies
-  end
+      resources :users, only: [:show, :index] do
+        resources :tweets, only: [:index]
+        get "tweets_and_replies", on: :member, as: :tweets_and_replies
+     end
 
-  resources :tweets, only: [:new, :create, :update, :index, :show] do
-    post "quote", on: :member
-    post "retweet",  on: :member
-    resources :bookmarks, only: [:create, :destroy, :show]
-    get "stats", on: :member, as: :tweet_stats
-  end
+    resources :tweets, only: [:new, :create, :update, :index, :show] do
+        post "quote", on: :member
+        post "retweet",  on: :member
+        resources :bookmarks, only: [:create, :destroy, :show]
+        get "stats", on: :member, as: :tweet_stats
+    end
   
- 
-    resources :tweets do
-      resources :likes, only: [:create, :destroy]
-    end
+  
+        resources :tweets do
+        resources :likes, only: [:create, :destroy]
+     end
 
-      resources :tweets do
-      resources :replies, only: [:create], param: :tweet_id
-    end
+       resources :tweets do
+       resources :replies, only: [:create], param: :tweet_id
+     end
 
 end
 
+namespace :web, defaults: { format: :json } do
 
-
-
+ 
   resources :users, only: [:show, :index], defaults: { format: :json } do
     resources :tweets, only: [:index]
     get "tweets_and_replies", on: :member, as: :tweets_and_replies
@@ -56,6 +56,10 @@ end
   resources :tweets do
     resources :replies, only: [:create], param: :tweet_id
   end
+
+
+end
+
 
 
 

@@ -1,1 +1,5 @@
-json.extract! @tweet, :id, :body, :quote, :retweet, :created_at, :updated_at, :user_id, :interaction_reference
+if @tweet.persisted?
+    json.tweet do 
+     json.partial! "api/tweets/tweet", tweet: @tweet
+   end
+end

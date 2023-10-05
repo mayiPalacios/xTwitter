@@ -1,5 +1,6 @@
 
 require 'rails_helper'
+require_relative '../support/authentication_shared_examples'
 
 RSpec.describe "TweetsLikes", type: :request do
   describe "POST /tweets/:tweet_id/likes/new" do
@@ -9,8 +10,8 @@ RSpec.describe "TweetsLikes", type: :request do
     it "creates a new like for a tweet" do
       tweet = create(:tweet)
       
-      post "/tweets/#{tweet.id}/likes", params: { user_id: user.id }
-
+      post "/api/tweets/#{tweet.id}/likes", params: { user_id: user.id }
+      puts response.body
       
       expect(response).to have_http_status(201)
       expect(response).to match_response_schema("like")
@@ -23,7 +24,7 @@ RSpec.describe "TweetsLikes", type: :request do
     let(:like) {FactoryBot.create(:like,user: user, tweet: tweet)}
     it "destroys an existing like for a tweet" do
    
-      delete "/tweets/#{tweet.id}/likes/#{like.id}"
+      delete "/api/tweets/#{tweet.id}/likes/#{like.id}"
     
 
       expect(response).to have_http_status(200)

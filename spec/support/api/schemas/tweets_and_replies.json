@@ -2,208 +2,217 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "tweets": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "body": {
-              "type": "string"
-            },
-            "quote": {
-              "type": "boolean"
-            },
-            "retweet": {
-              "type": "boolean"
-            },
-            "created_at": {
-              "type": "string"
-            },
-            "updated_at": {
-              "type": "string"
-            },
-            "user_id": {
-              "type": "integer"
-            },
-            "interaction_reference": {
-              "type": "null"
+    "tweets_and_replies?": {
+      "type": "object",
+      "properties": {
+        "tweets": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "quote": {
+                  "type": "boolean"
+                },
+                "retweet": {
+                  "type": "boolean"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                },
+                "interaction_reference": {
+                  "type": "null"
+                }
+              },
+              "required": [
+                "id",
+                "body",
+                "quote",
+                "retweet",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "interaction_reference"
+              ]
             }
-          },
-          "required": [
-            "id",
-            "body",
-            "quote",
-            "retweet",
-            "created_at",
-            "updated_at",
-            "user_id",
-            "interaction_reference"
+          ]
+        },
+        "replies": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                },
+                "tweet_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "body",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "tweet_id"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                },
+                "tweet_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "body",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "tweet_id"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                },
+                "tweet_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "body",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "tweet_id"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                },
+                "tweet_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "body",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "tweet_id"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "body": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "integer"
+                },
+                "tweet_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id",
+                "body",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "tweet_id"
+              ]
+            }
           ]
         }
-      ]
-    },
-    "replies": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "body": {
-              "type": "string"
-            },
-            "created_at": {
-              "type": "string"
-            },
-            "updated_at": {
-              "type": "string"
-            },
-            "user_id": {
-              "type": "integer"
-            },
-            "tweet_id": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "id",
-            "body",
-            "created_at",
-            "updated_at",
-            "user_id",
-            "tweet_id"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "body": {
-              "type": "string"
-            },
-            "created_at": {
-              "type": "string"
-            },
-            "updated_at": {
-              "type": "string"
-            },
-            "user_id": {
-              "type": "integer"
-            },
-            "tweet_id": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "id",
-            "body",
-            "created_at",
-            "updated_at",
-            "user_id",
-            "tweet_id"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "body": {
-              "type": "string"
-            },
-            "created_at": {
-              "type": "string"
-            },
-            "updated_at": {
-              "type": "string"
-            },
-            "user_id": {
-              "type": "integer"
-            },
-            "tweet_id": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "id",
-            "body",
-            "created_at",
-            "updated_at",
-            "user_id",
-            "tweet_id"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "body": {
-              "type": "string"
-            },
-            "created_at": {
-              "type": "string"
-            },
-            "updated_at": {
-              "type": "string"
-            },
-            "user_id": {
-              "type": "integer"
-            },
-            "tweet_id": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "id",
-            "body",
-            "created_at",
-            "updated_at",
-            "user_id",
-            "tweet_id"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "body": {
-              "type": "string"
-            },
-            "created_at": {
-              "type": "string"
-            },
-            "updated_at": {
-              "type": "string"
-            },
-            "user_id": {
-              "type": "integer"
-            },
-            "tweet_id": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "id",
-            "body",
-            "created_at",
-            "updated_at",
-            "user_id",
-            "tweet_id"
-          ]
-        }
+      },
+      "required": [
+        "tweets",
+        "replies"
       ]
     },
     "pagination": {
@@ -223,8 +232,7 @@
     }
   },
   "required": [
-    "tweets",
-    "replies",
+    "tweets_and_replies?",
     "pagination"
   ]
 }
