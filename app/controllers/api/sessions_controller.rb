@@ -1,4 +1,5 @@
 class API::SessionsController < ApiController
+  skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
   
     def new 
@@ -9,10 +10,9 @@ class API::SessionsController < ApiController
       @user = User.find_by(email: user_params[:email])
 
       if @user && @user.password == user_params[:password]
-         cookies.encrypted.signed[:user_id] = @user.id 
+        
       else 
-        flash.now[:notice] = "Invalid email or password"
-        render :new 
+       
     end
 
 end

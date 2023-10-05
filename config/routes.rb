@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 
 namespace :api, defaults: { format: :json } do
 
+  post '/register', to: 'registration#create'
+  resources :post do
+    
+    get '/sign_in', to: 'sessions#new'
+    get  '/sign_out', to: 'sessions#destroy'
+   end
+
+
   resources :users, only: [:show, :index] do
     resources :tweets, only: [:index]
     get "tweets_and_replies", on: :member, as: :tweets_and_replies
