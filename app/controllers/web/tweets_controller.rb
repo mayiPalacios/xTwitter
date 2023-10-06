@@ -1,4 +1,4 @@
-class TweetsController < ApplicationController
+class Web::TweetsController < ApplicationController
   include TweetStatsModule
     def create
         user_id = params[:user_id]
@@ -16,7 +16,7 @@ class TweetsController < ApplicationController
  
     end
  
-  def index
+   def index
         user_id = params[:user_id]
  
         user = User.find(params[:user_id])
@@ -24,7 +24,8 @@ class TweetsController < ApplicationController
 
         respond_to do |format|
           if @tweets
-          format.json { render json: { tweet: @tweets }, status: :created }
+          format.html { render '/web/tweets/index' } 
+         # format.json { render json: { tweet: @tweets }, status: :created }
           end
        end
     
