@@ -1,9 +1,33 @@
-class UsersController < ApplicationController
+class Web::UsersController < ApplicationController
 
    def create
        @user = FactoryBot.create(:user)
        render_to_json(@user)
    end
+
+
+ 
+   def show_by_username
+    @user = User.find_by(username: params[:username])
+
+    if @user
+      # Recopila la información necesaria, como nombre, apellido, bio, fecha de unión, etc.
+      @tweets = @user.tweets.paginate(page: params[:page], per_page: 5)
+
+      render 'show_by_username'
+    else
+      # Maneja el caso en que no se encuentra el usuario por su nombre de usuario
+      redirect_to root_path, alert: "Usuario no encontrado"
+    end
+  end
+
+    def index
+
+    
+  
+
+    end
+
 
    def tweets_and_replies
     user = User.find(params[:id])

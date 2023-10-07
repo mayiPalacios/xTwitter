@@ -9,10 +9,10 @@ class Web::TweetsController < ApplicationController
         @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet)
    
         
-        respond_to do |format|
+        
           if @tweet.save
-            format.html { redirect_to '/web/tweets' }
-          end
+            redirect_to web_tweets_path(user_id: user_id)
+        
         end
  
     end
@@ -32,16 +32,22 @@ class Web::TweetsController < ApplicationController
     
   #  end
 
+  
+
 
      def index 
-        @tweets = Tweet.all()
+      user = User.find(params[:user_id])
 
-         respond_to do |format|
-         if @tweets
-         format.html { render '/web/tweets/index' } 
-             
-         end
-      end
+      # Obtén los IDs de los usuarios a los que sigue el usuario especificado
+      following_ids = Follower.where(following_id: user.id).pluck(:followee_id)
+      
+      # Agrega el ID del usuario especificado a la lista (si deseas incluirlo)
+      following_ids << user.id
+      
+      @tweets = Tweet.where(user_id: following_ids).order(created_at: :desc)
+      
+       render '/web/tweets/index' 
+     
    end 
    
    
@@ -101,6 +107,7 @@ class Web::TweetsController < ApplicationController
         
    end
  
+   
 
  
    private

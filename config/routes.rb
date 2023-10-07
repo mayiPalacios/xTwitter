@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
   }
   
-  
+  root 'default#home'
+
   get '/home', to: 'default#home'
 
 namespace :api, defaults: { format: :json } do
@@ -50,8 +52,9 @@ namespace :web  do
     post "retweet", on: :member
     resources :bookmarks, only: [:create, :destroy]
     get "stats", on: :member, as: :tweet_stats
-    get 'tweets/feed', to: 'tweets#feed', as: 'feed_tweets'
  end
+
+
 
 
  resources :tweets do
@@ -62,6 +65,7 @@ namespace :web  do
     resources :replies, only: [:create], param: :tweet_id
   end
 
+  get "user/:username", to: "users#show_by_username", as: :user_by_username
 
 end
 

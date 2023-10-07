@@ -41,3 +41,49 @@ ul {
     border-color: transparent;
     box-shadow: none;
 }
+
+.probando {
+   background-color: red;
+}
+.container__main--post{
+    width: 100%;
+}
+
+
+.sidebar__container{
+    background-color: #fff;
+    color: black;
+    a{
+        color: black;
+    }
+}
+
+
+//
+// .sidebar {
+//     background-color: #333;
+//     color: #fff;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100vh;
+//     display: none; /* Inicialmente oculto en pantallas grandes */
+//     transition: width 0.3s;
+// }
+
+// .sidebar.show {
+//     display: block; /* Mostrar en pantallas pequeñas */
+//     width: 100%; /* Ancho completo en pantallas pequeñas */
+//     max-width: 250px; /* Ancho máximo en pantallas grandes */
+// }
+
+// .sidebar .nav-link {
+//     color: #fff;
+// }
+
+// /* Estilos para los iconos */
+// .fa {
+//     font-size: 24px;
+//     margin-right: 10px;
+// }
