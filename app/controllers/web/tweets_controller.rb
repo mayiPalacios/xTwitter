@@ -8,28 +8,41 @@ class Web::TweetsController < ApplicationController
    
         @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet)
    
+        
         respond_to do |format|
           if @tweet.save
-             format.json { render json: { tweet: @tweet }, status: :created }
+            format.html { redirect_to '/web/tweets' }
           end
         end
  
     end
  
-   def index
-        user_id = params[:user_id]
+  #  def index
+  #       user_id = params[:user_id]
  
-        user = User.find(params[:user_id])
-        @tweets = user.tweets.paginate(page: params[:page], per_page: 2) 
+  #       user = User.find(params[:user_id])
+  #       @tweets = user.tweets.paginate(page: params[:page], per_page: 2) 
 
-        respond_to do |format|
-          if @tweets
-          format.html { render '/web/tweets/index' } 
-         # format.json { render json: { tweet: @tweets }, status: :created }
-          end
-       end
+  #       respond_to do |format|
+  #         if @tweets
+  #         format.html { render '/web/tweets/index' } 
+  #        # format.json { render json: { tweet: @tweets }, status: :created }
+  #         end
+  #      end
     
-   end
+  #  end
+
+
+     def index 
+        @tweets = Tweet.all()
+
+         respond_to do |format|
+         if @tweets
+         format.html { render '/web/tweets/index' } 
+             
+         end
+      end
+   end 
    
    
    before_action :set_tweet, only: [:update,:retweet]

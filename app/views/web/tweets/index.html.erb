@@ -1,42 +1,81 @@
 
-
 <div>
-<% @tweets.each do |tweet| %>
-  <h1><%= tweet.body %></h1>
-  <div class="post__container  container d-flex justify-content-center align-items-center flex-column  ">
- 
 
- <div class="user__post card"  style="width: 35rem;"> 
-  <div class="post__info m-4 pr-4" >
-      <div class="container_user--name d-flex gap-2  ">
-        <figure><img  class="img-fluid rounded-circle" src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
-        <div class="user__name d-flex flex-column">
-         <ins><a>Jaine Griffith</a></ins>
-         <span class="text-primary">published: june,2 2018 19:PM</span>
+  <div class="container__create--post card container d-flex justify-content-center align-items-center flex-column mt-4"
+    style="width: 35rem;">
+    <div class="new__post d-flex flex-row  m-4 gap-4">
+      <figure><img class="img-fluid rounded-circle"
+          src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+        <div class="form__container">
+          <%= form_with(model: @tweet, url: web_tweets_path) do |form| %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.hidden_field :quote, value: false %>
+      <%= form.hidden_field :retweet, value: false %>
+      <div class=" form-group ">
+        <%= form.text_area :body, class: "form-control border-0 ", rows: 3, placeholder: "Escribe algo" %>
+      </div>
+      <div class="add__picture--container">
+        <ul class="d-flex justify-content-end gap-3 mr-4">
+          <li class="pt-2">
+            <i class="fa fa-image fa-lg" id="icon"></i>
+            <label class="fileContainer">
+              <input type="file" id="fileInput" style="display: none;">
+            </label>
+          </li>
+          <li>
+            <%= form.submit "Post", class: "btn btn-primary" %>
+          </li>
+        </ul>
+      </div>
+      <% end %>
+         
+        
+          </div>
+     
+
+    </div>
+  </div>
+
+  <% @tweets.each do |tweet| %>
+ <% user = User.find(tweet.user_id) %>
+  <div class="post__container mt-3  container d-flex justify-content-center align-items-center flex-column  ">
+    <div class="user__post card" style="width: 35rem;">
+      <div class="post__info m-4 pr-4">
+        <div class="container_user--name d-flex gap-2  ">
+          <figure><img class="img-fluid rounded-circle"
+              src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+          <div class="user__name d-flex flex-column">
+            <ins><a><%= user.username %></a></ins>
+            <span class="text-primary">published: <%= tweet.created_at %></span>
+          </div>
+
         </div>
 
+        <div class="post__content mt-2">
+          <img src="https://www.wpkixx.com/html/winku-dark/images/resources/user-post.jpg" class="img-fluid">
+          <div class="post__interaction">
+            <ul class="d-flex">
+              <li><i class="fa-sharp fa-regular fa-comments" style="color: #3465a4; width: 35px; height:35px"></i></li>
+
+              <li><i class="fas fa-heart" style="color: #cc0000;"></i></li>
+            </ul>
+
+          </div>
+          <div class="post__description">
+            <p><%= tweet.body %></p>
+          </div>
+        </div>
       </div>
-
-     <div class="post__content mt-2">
-      <img src="https://www.wpkixx.com/html/winku-dark/images/resources/user-post.jpg" class="img-fluid">
-      <div class="post__interaction">
-       <ul class="d-flex">
-       <li><i class="fa-sharp fa-regular fa-comments" style="color: #3465a4; width: 35px; height:35px"></i></li>
-      
-
-       <li><i class="fas fa-heart" style="color: #cc0000;"></i></li>
-       </ul>
-
-      </div>
-      <div class="post__description"><p><%= tweet.body %></p></div>
-     </div>
+    </div>
+    <div class="comment_area"> </div>
   </div>
-  </div>
-  <div class="comment_area"> </div>
-  </div>
-
-
 
 </div>
 <% end %>
 </div>
+
+<script>
+  document.getElementById('icon').addEventListener('click', function() {
+    document.getElementById('fileInput').click();
+  });
+</script>

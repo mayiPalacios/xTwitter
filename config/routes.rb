@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'custom_sessions',
-    registrations: 'custom_registrations'
+    registrations: 'users/registrations'
   }
   
   
@@ -51,6 +50,7 @@ namespace :web  do
     post "retweet", on: :member
     resources :bookmarks, only: [:create, :destroy]
     get "stats", on: :member, as: :tweet_stats
+    get 'tweets/feed', to: 'tweets#feed', as: 'feed_tweets'
  end
 
 

@@ -1,2 +1,0 @@
-class CustomRegistrationsController < ApplicationController
-end
