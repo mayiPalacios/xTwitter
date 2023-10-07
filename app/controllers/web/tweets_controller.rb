@@ -1,13 +1,17 @@
 class Web::TweetsController < ApplicationController
   include TweetStatsModule
+  include CloudinaryMethod
+
     def create
         user_id = params[:user_id]
         body = params[:body]
         quote = params[:quote]
         retweet = params[:retweet]
-   
-        @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet)
-   
+        url_imagen = params[:photo_url]
+        probando =  upload(url_imagen)
+        
+        @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet,photo_url: probando["url"])
+         
         
         
           if @tweet.save
@@ -37,7 +41,8 @@ class Web::TweetsController < ApplicationController
 
      def index 
       user = User.find(params[:user_id])
-
+    
+    
       # Obtén los IDs de los usuarios a los que sigue el usuario especificado
       following_ids = Follower.where(following_id: user.id).pluck(:followee_id)
       

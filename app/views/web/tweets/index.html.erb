@@ -85,34 +85,37 @@
           
                 src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
             <div class="form__container">
-              <%= form_with(model: @tweet, url: web_tweets_path) do |form| %>
-              <%= form.hidden_field :user_id, value: current_user.id %>
-              <%= form.hidden_field :quote, value: false %>
-              <%= form.hidden_field :retweet, value: false %>
-              <div class=" form-group ">
-                <%= form.text_area :body, class: "form-control border-0 ", rows: 3, placeholder: "Escribe algo" %>
-              </div>
-              <div class="add__picture--container">
-                <ul class="d-flex justify-content-end gap-3 mr-4">
-                  <li class="pt-2">
-                    <i class="fa fa-image fa-lg" id="icon"></i>
-                    <label class="fileContainer">
-                      <input type="file" id="fileInput" style="display: none;">
-                    </label>
-                  </li>
-                  <li>
-                    <%= form.submit "Post", class: "btn btn-primary" %>
-                  </li>
-                </ul>
-              </div>
-              <% end %>
+     <%= form_with(model: @tweet, url: web_tweets_path, multipart: true) do |form| %>
+     <%= form.hidden_field :user_id, value: current_user.id %>
+     <%= form.hidden_field :quote, value: false %>
+     <%= form.hidden_field :retweet, value: false %>
+     <div class="form-group">
+       <%= form.text_area :body, class: "form-control border-0", rows: 3, placeholder: "Escribe algo" %>
+     </div>
+     <div class="add__picture--container">
+       <ul class="d-flex justify-content-end gap-3 mr-4">
+         <li class="pt-2">
+           <i class="fa fa-image fa-lg" id="icon"></i>
+           <label class="fileContainer">
+             <!-- Utiliza el campo de archivo para seleccionar una imagen -->
+             <%= form.file_field :photo_url, id: "fileInput", style: "display: none;" %>
+           </label>
+         </li>
+         <li>
+           <%= form.submit "Post", class: "btn btn-primary" %>
+         </li>
+       </ul>
+     </div>
+     <% end %>
 
-            </div>
+   </div>
           </div>
         </div>
+        
           <div class="contenedor de tweets">
             <% @tweets.each do |tweet| %>
             <% user = User.find(tweet.user_id) %>
+          
             <div class="post__container mt-3  container d-flex justify-content-center align-items-center flex-column  ">
               <div class="user__post card" style="width: 35rem;">
                 <div class="post__info m-4 pr-4">
@@ -125,9 +128,12 @@
                     </div>
 
                   </div>
-
+                   
                   <div class="post__content mt-2">
-                    <img src="https://www.wpkixx.com/html/winku-dark/images/resources/user-post.jpg" class="img-fluid">
+                    <div class="post__description">
+                      <p><%= tweet.body %></p>
+                    </div>
+                    <img src=<%= tweet.photo_url%> class="img-fluid">
                     <div class="post__interaction">
                       <ul class="d-flex">
                         <li><i class="fa-sharp fa-regular fa-comments"
@@ -138,9 +144,7 @@
                       </ul>
 
                     </div>
-                    <div class="post__description">
-                      <p><%= tweet.body %></p>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

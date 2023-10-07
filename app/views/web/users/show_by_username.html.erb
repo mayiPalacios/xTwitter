@@ -1,12 +1,25 @@
-<div class="tweets-section">
+<div class="container">
 
 <div>
  <div>
-  
+  <div>
+   <figure><img class="img-fluid rounded-circle"
+            src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+  </div>
+  <div>
+    <h3>Raul Guillen</h3>
+    <span>@Rausikes</span>
+  </div>
+  <div><i class="fa-thin fa-calendar-days"></i> calendar  </div>
+  <div> 
+   <div>24 Following</div>
+   <div>0 Followers</div>
+   </div>
  </div>
-<div id="tweets-container">
+
+<div id="tweets-container ">
      <% @tweets.each do |tweet| %>
-      <div class="post__container container d-flex justify-content-center align-items-center flex-column">
+      <div class="post__container container d-flex justify-content-center align-items-center flex-column mt-2">
         <div class="user__post card" style="width: 35rem;">
           <div class="post__info m-4 pr-4">
             <div class="container_user--name d-flex gap-2">

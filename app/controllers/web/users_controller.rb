@@ -1,5 +1,7 @@
 class Web::UsersController < ApplicationController
 
+
+
    def create
        @user = FactoryBot.create(:user)
        render_to_json(@user)
