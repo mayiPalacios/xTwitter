@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
     has_many :bookmarks 
     has_many :tweets  
-    has_many :followees, class_name: 'Follower', foreign_key: 'followee_id'
+    has_many :followers, class_name: 'Follower', foreign_key: 'followee_id'
     has_many :replies
     has_many :followings, class_name: 'Follower', foreign_key: 'following_id'
     #validates :email, uniqueness: true, presence: true
@@ -109,6 +109,8 @@ scope :create_sample_users, -> {
 
   end
 
+
+ 
     private 
     
     def email_presence_in_user

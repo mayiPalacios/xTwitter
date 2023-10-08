@@ -106,13 +106,13 @@
                     src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
               </div>
               <div>
-                <h3>Raul Guillen</h3>
-                <span>@Rausikes</span>
+                <h3><%= @user.name %> <%= @user.lastname %></h3>
+                <span>@<%= @user.username %></span>
               </div>
-              <div> <i class="fas fa-calendar"></i>calendar </div>
-              <div class="d-flex">
-                <div>24 Following</div>
-                <div>0 Followers</div>
+              <div> <i class="fas fa-calendar"></i> <%= @user.created_at %> </div>
+              <div class="d-flex gap-3">
+                <div><%= @followers_count %> Following</div>
+                <div><%= @following_count %> Followers</div>
               </div>
             </div>
 

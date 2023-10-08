@@ -158,7 +158,15 @@
                         <% end %>
                         </li>
                         <li><i class="fas fa-heart" style="color: #cc0000; font-size: 20px;"></i></li>
-                        <li><i class="fa-solid fa-retweet" style="color: #1f513e; font-size: 20px;"></i></li>
+                        <li>
+                          <%= form_tag(retweet_web_tweet_path(tweet), method: :post, remote: true, class: "retweet-form") do %>
+                          <%= hidden_field_tag :tweet_id, tweet.id %>
+                          <%= hidden_field_tag :user_id, current_user.id %>
+                          <button type="submit" class="retweet-button">
+                            <i class="fa-solid fa-retweet" style="color: #1f513e; font-size: 20px;"></i>
+                          </button>
+                          <% end %>
+                        </li>
                       </ul>
 
                     </div>

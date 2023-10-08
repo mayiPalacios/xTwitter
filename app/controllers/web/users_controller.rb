@@ -15,6 +15,8 @@ class Web::UsersController < ApplicationController
     if @user
       
       @tweets = @user.tweets.paginate(page: params[:page], per_page: 5)
+      @followers_count = @user.followers.count
+      @following_count = @user.followings.count
 
       render 'show_by_username'
     else

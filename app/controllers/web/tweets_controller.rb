@@ -85,23 +85,40 @@ class Web::TweetsController < ApplicationController
    end
  
  
-    def retweet
+  #   def retweet
  
-        tweet_id = params[:id]  
-        user_id = params[:user_id]
+  #       tweet_id = params[:id]  
+  #       user_id = params[:user_id]
  
-        @tweet = Tweet.new(user_id: user_id, body: nil, quote: false, retweet: true,interaction_reference: tweet_id)
+  #       @tweet = Tweet.new(user_id: user_id, body: nil, quote: false, retweet: true,interaction_reference: tweet_id)
      
-        respond_to do |format|
-            if @tweet.save
-              format.json { render json: { tweet: @tweet }, status: :created }
-            else
-                 format.json { render json: @tweet.errors, status: :unprocessable_entity }
-            end
-        end
+  #       respond_to do |format|
+  #           if @tweet.save
+  #             format.json { render json: { tweet: @tweet }, status: :created }
+  #           else
+  #                format.json { render json: @tweet.errors, status: :unprocessable_entity }
+  #           end
+  #       end
     
-   end
- 
+  #  end
+
+  def retweet
+    tweet_id = params[:id]
+    user_id = current_user.id
+  
+    if has_retweeted?(tweet_id, user_id)
+      Tweet.where(user_id: user_id, interaction_reference: tweet_id, retweet: true).delete_all
+      render json: { message: 'Retweet deshecho.' }, status: :ok
+    else
+      @tweet = Tweet.new(user_id: user_id, body: nil, quote: false, retweet: true, interaction_reference: tweet_id)
+      
+      if @tweet.save
+        redirect_to web_user_by_username_path(username: current_user.username)
+      end
+    end
+  end
+  
+  
 
    def show 
     @tweet = Tweet.find(params[:id])
@@ -123,5 +140,9 @@ class Web::TweetsController < ApplicationController
      params.require(:tweet).permit(:body, :quote, :retweet)
    end
  
+   def has_retweeted?(tweet_id,user_id)
+    Tweet.where(retweet: true, interaction_reference: tweet_id, user_id: user_id).exists?
+  end
+
   
 end
