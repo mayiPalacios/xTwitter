@@ -23,21 +23,6 @@ class Web::TweetsController < ApplicationController
         end
  
     end
- 
-  #  def index
-  #       user_id = params[:user_id]
- 
-  #       user = User.find(params[:user_id])
-  #       @tweets = user.tweets.paginate(page: params[:page], per_page: 2) 
-
-  #       respond_to do |format|
-  #         if @tweets
-  #         format.html { render '/web/tweets/index' } 
-  #        # format.json { render json: { tweet: @tweets }, status: :created }
-  #         end
-  #      end
-    
-  #  end
 
   
 
@@ -46,10 +31,10 @@ class Web::TweetsController < ApplicationController
       user = User.find(params[:user_id])
     
     
-      # Obtén los IDs de los usuarios a los que sigue el usuario especificado
+    
       following_ids = Follower.where(following_id: user.id).pluck(:followee_id)
       
-      # Agrega el ID del usuario especificado a la lista (si deseas incluirlo)
+     
       following_ids << user.id
       
       @tweets = Tweet.where(user_id: following_ids).order(created_at: :desc)
@@ -87,23 +72,7 @@ class Web::TweetsController < ApplicationController
   
    end
  
- 
-  #   def retweet
- 
-  #       tweet_id = params[:id]  
-  #       user_id = params[:user_id]
- 
-  #       @tweet = Tweet.new(user_id: user_id, body: nil, quote: false, retweet: true,interaction_reference: tweet_id)
-     
-  #       respond_to do |format|
-  #           if @tweet.save
-  #             format.json { render json: { tweet: @tweet }, status: :created }
-  #           else
-  #                format.json { render json: @tweet.errors, status: :unprocessable_entity }
-  #           end
-  #       end
-    
-  #  end
+
 
   def retweet
     tweet_id = params[:id]
