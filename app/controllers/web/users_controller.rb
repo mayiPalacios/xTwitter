@@ -13,12 +13,12 @@ class Web::UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
 
     if @user
-      # Recopila la información necesaria, como nombre, apellido, bio, fecha de unión, etc.
+      
       @tweets = @user.tweets.paginate(page: params[:page], per_page: 5)
 
       render 'show_by_username'
     else
-      # Maneja el caso en que no se encuentra el usuario por su nombre de usuario
+      
       redirect_to root_path, alert: "Usuario no encontrado"
     end
   end

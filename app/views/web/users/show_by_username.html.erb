@@ -1,65 +1,204 @@
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitter Clone</title>
+  <!-- Agrega aquí tus enlaces a las hojas de estilo de Bootstrap y otros recursos si los tienes -->
+</head>
+<body>
+
+<!-- Navbar para Iniciar sesión y Registrarse -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">Twitter Clone</a>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
 <div class="container">
 
-<div>
- <div>
   <div>
-   <figure><img class="img-fluid rounded-circle"
-            src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
-  </div>
-  <div>
-    <h3>Raul Guillen</h3>
-    <span>@Rausikes</span>
-  </div>
-  <div><i class="fa-thin fa-calendar-days"></i> calendar  </div>
-  <div> 
-   <div>24 Following</div>
-   <div>0 Followers</div>
-   </div>
- </div>
+     
+     <div class="  d-flex justify-content-space-around ">
+    <div class="" >
+      <div class="sidebar__container mt-3 "  >
+      <ul class="nav flex-column gap-4" >
+     <li class="nav-item">
+            <%= link_to web_tweets_path(user_id: current_user.id), class: "nav-link" do %>
+            <i class="fa fa-home fa-lg"></i>
+            Inicio
+            <% end %>
+        </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-bell fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        Notificaciones
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-envelope fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        Mensajes
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-bookmark fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        Bookmarks
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-users fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        Communities
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-star fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        Premium
+      </a>
+    </li>
+   <li class="nav-item">
+  <%= link_to web_user_by_username_path(username: current_user.username), class: "nav-link" do %>
+    <i class="fa fa-user-circle fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+    Profile
+  <% end %>
+</li>
 
-<div id="tweets-container ">
-     <% @tweets.each do |tweet| %>
-      <div class="post__container container d-flex justify-content-center align-items-center flex-column mt-2">
-        <div class="user__post card" style="width: 35rem;">
-          <div class="post__info m-4 pr-4">
-            <div class="container_user--name d-flex gap-2">
-              <figure>
-                <img class="img-fluid rounded-circle" src="<%= tweet.user.photo_url %>">
-              </figure>
-              <div class="user__name d-flex flex-column">
-                <ins><%= tweet.user.name %></ins>
-                <span class="text-primary">published: <%= tweet.created_at.strftime("%B %d, %Y %H:%M") %></span>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-ellipsis-h fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        More
+      </a>
+    </li>
+  <li class="nav-item">
+  <%= button_to destroy_user_session_path, method: :delete, class: "btn " do %>
+    
+    <i class="fa fa-sign-out fa-lg"></i>
+     <span>Sign out</span>
+  <% end %>
+</li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">
+        <i class="fa fa-comment fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+        Messages
+      </a>
+    </li>
+  </ul>
+      </div>
+    </div>
+
+
+    <div class="col-md-10">
+      <div class="">
+        <!-- Contenido de la página aquí -->
+        <div
+          class="container__create--post card container d-flex justify-content-center align-items-center flex-column mt-4"
+          style="width: 35rem;">
+          <div class="new__post d-flex flex-row  m-4 gap-4">
+
+            <div style="margin-left: 32px;">
+              <div>
+                <figure class="profile-picture"><img class="img-fluid rounded-circle"
+                    src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+              </div>
+              <div>
+                <h3>Raul Guillen</h3>
+                <span>@Rausikes</span>
+              </div>
+              <div> <i class="fas fa-calendar"></i>calendar </div>
+              <div class="d-flex">
+                <div>24 Following</div>
+                <div>0 Followers</div>
               </div>
             </div>
 
-            <div class="post__content mt-2">
-            <div class="post__description">
-                <p><%= tweet.body %></p>
-              </div>
-              <img src="<%= tweet.photo_url %>" class="img-fluid">
-              <div class="post__interaction">
-                <ul class="d-flex">
-                  <li><i class="fa-sharp fa-regular fa-comments" style="color: #3465a4; width: 35px; height: 35px"></i></li>
-                  <li><i class="fas fa-heart" style="color: #cc0000;"></i></li>
-                </ul>
-              </div>
-              
-            </div>
           </div>
         </div>
-        <div class="comment_area"> </div>
       </div>
-    <% end %>
+      <div class="d-flex justify-content-center align-items-center""> 
+  <nav class=" navbar navbar-expand-lg navbar-light bg-light" style="width: 60%;">
+        <div class="container">
+          <!-- Enlaces del menú -->
+          <div class="collapse navbar-collapse d-flex justify-content-center align-items-center" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Posts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Replies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Highlights</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Medias</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Likes</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        </nav>
+
+      </div>
+
+      <div id="tweets-container ">
+        <% @tweets.each do |tweet| %>
+        <div class="post__container container d-flex justify-content-center align-items-center flex-column mt-2">
+          <div class="user__post card" style="width: 35rem;">
+            <div class="post__info m-4 pr-4">
+              <div class="container_user--name d-flex gap-2">
+                <figure>
+                  <img class="img-fluid rounded-circle" src="<%= tweet.user.photo_url %>">
+                </figure>
+                <div class="user__name d-flex flex-column">
+                  <ins><%= tweet.user.name %></ins>
+                  <span class="text-primary">published: <%= tweet.created_at.strftime("%B %d, %Y %H:%M") %></span>
+                </div>
+              </div>
+
+              <div class="post__content mt-2">
+                <div class="post__description">
+                  <p><%= tweet.body %></p>
+                </div>
+                <img src="<%= tweet.photo_url %>" class="img-fluid">
+                <div class="post__interaction">
+                  <ul class="d-flex gap-3">
+                     <%= link_to web_tweet_path(tweet) do %>
+                        <li>
+                          <i class="fa-sharp fa-regular fa-comments" style="color: #3465a4; font-size: 20px;"></i>
+                        </li>
+                        <% end %>
+                    <li><i class="fas fa-heart" style="color: #cc0000; font-size: 20px;"></i></li>
+                    <li><i class="fa-solid fa-retweet" style="color: #1f513e; font-size: 20px;"></i></li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="comment_area"> </div>
+        </div>
+        <% end %>
+      </div>
+
+      <%= will_paginate @tweets %>
+
+      <div class="load-more">
+        <a href="#" id="load-more-button">Cargar más tweets</a>
+      </div>
+
+    </div>
+
   </div>
 
-   <%= will_paginate @tweets %>
-
-  <div class="load-more">
-    <a href="#" id="load-more-button">Cargar más tweets</a>
-  </div>
-
-</div>
 
 
-  
-</div>
+
+</body>
+</html>

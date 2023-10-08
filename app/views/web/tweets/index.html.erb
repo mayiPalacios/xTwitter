@@ -1,121 +1,136 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twitter Clone</title>
+  <!-- Agrega aquí tus enlaces a las hojas de estilo de Bootstrap y otros recursos si los tienes -->
+</head>
 
-  <div class="  d-flex justify-content-space-around ">
-    <div class="" >
-      <div class="sidebar__container mt-3 "  >
-      <ul class="nav flex-column gap-4" >
-    <li class="nav-item" >
-      <a class="nav-link" href="#">
-        <i class="fa fa-home fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Inicio
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-bell fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Notificaciones
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-envelope fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Mensajes
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-bookmark fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Bookmarks
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-users fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Communities
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-star fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Premium
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-user-circle fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Profile
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-ellipsis-h fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        More
-      </a>
-    </li>
-  <li class="nav-item">
-  <%= button_to destroy_user_session_path, method: :delete, class: "btn " do %>
-    
-    <i class="fa fa-sign-out fa-lg"></i>
-     <span>Sign out</span>
-  <% end %>
-</li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <i class="fa fa-comment fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
-        Messages
-      </a>
-    </li>
-  </ul>
+<body>
 
- <h1><%current_user.id%></h1>
-      </div>
+  <!-- Navbar para Iniciar sesión y Registrarse -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Twitter Clone</a>
     </div>
+  </nav>
 
-    <!-- Contenedor del Contenido Principal -->
-    <div class="col-md-10">
+  <div class="container">
+
+    <div class="  d-flex justify-content-space-around ">
       <div class="">
-        <!-- Contenido de la página aquí -->
-        <div
-          class="container__create--post card container d-flex justify-content-center align-items-center flex-column mt-4"
-          style="width: 35rem;">
-          <div class="new__post d-flex flex-row  m-4 gap-4">
-           
-            <figure><img class="img-fluid rounded-circle"
-          
-                src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
-            <div class="form__container">
-     <%= form_with(model: @tweet, url: web_tweets_path, multipart: true) do |form| %>
-     <%= form.hidden_field :user_id, value: current_user.id %>
-     <%= form.hidden_field :quote, value: false %>
-     <%= form.hidden_field :retweet, value: false %>
-     <div class="form-group">
-       <%= form.text_area :body, class: "form-control border-0", rows: 3, placeholder: "Escribe algo" %>
-     </div>
-     <div class="add__picture--container">
-       <ul class="d-flex justify-content-end gap-3 mr-4">
-         <li class="pt-2">
-           <i class="fa fa-image fa-lg" id="icon"></i>
-           <label class="fileContainer">
-             <!-- Utiliza el campo de archivo para seleccionar una imagen -->
-             <%= form.file_field :photo_url, id: "fileInput", style: "display: none;" %>
-           </label>
-         </li>
-         <li>
-           <%= form.submit "Post", class: "btn btn-primary" %>
-         </li>
-       </ul>
-     </div>
-     <% end %>
+        <div class="sidebar__container mt-3 ">
+          <ul class="nav flex-column gap-4">
+            <li class="nav-item">
+              <%= link_to web_tweets_path(user_id: current_user.id), class: "nav-link" do %>
+              <i class="fa fa-home fa-lg"></i>
+              Inicio
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-bell fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Notificaciones
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-envelope fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Mensajes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-bookmark fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Bookmarks
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-users fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Communities
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-star fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Premium
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= link_to web_user_by_username_path(username: current_user.username), class: "nav-link" do %>
+              <i class="fa fa-user-circle fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+              Profile
+              <% end %>
+            </li>
 
-   </div>
-          </div>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-ellipsis-h fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                More
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= button_to destroy_user_session_path, method: :delete, class: "btn " do %>
+
+              <i class="fa fa-sign-out fa-lg"></i>
+              <span>Sign out</span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-comment fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Messages
+              </a>
+            </li>
+          </ul>
         </div>
-        
+      </div>
+
+      <div class="col-md-10">
+        <div class="">
+          <!-- Contenido de la página aquí -->
+          <div
+            class="container__create--post card container d-flex justify-content-center align-items-center flex-column mt-4"
+            style="width: 35rem;">
+            <div class="new__post d-flex flex-row  m-4 gap-4">
+
+              <figure><img class="img-fluid rounded-circle"
+                  src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+              <div class="form__container">
+                <%= form_with(model: @tweet, url: web_tweets_path, multipart: true) do |form| %>
+                <%= form.hidden_field :user_id, value: current_user.id %>
+                <%= form.hidden_field :quote, value: false %>
+                <%= form.hidden_field :retweet, value: false %>
+                <div class="form-group">
+                  <%= form.text_area :body, class: "form-control border-0", rows: 3, placeholder: "Escribe algo" %>
+                </div>
+                <div class="add__picture--container">
+                  <ul class="d-flex justify-content-end gap-3 mr-4">
+                    <li class="pt-2">
+                      <i class="fa fa-image fa-lg" id="icon"></i>
+                      <label class="fileContainer">
+                        <!-- Utiliza el campo de archivo para seleccionar una imagen -->
+                        <%= form.file_field :photo_url, id: "fileInput", style: "display: none;" %>
+                      </label>
+                    </li>
+                    <li>
+                      <%= form.submit "Post", class: "btn btn-primary" %>
+                    </li>
+                  </ul>
+                </div>
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+
           <div class="contenedor de tweets">
             <% @tweets.each do |tweet| %>
             <% user = User.find(tweet.user_id) %>
-          
+
             <div class="post__container mt-3  container d-flex justify-content-center align-items-center flex-column  ">
               <div class="user__post card" style="width: 35rem;">
                 <div class="post__info m-4 pr-4">
@@ -128,42 +143,45 @@
                     </div>
 
                   </div>
-                   
+
                   <div class="post__content mt-2">
                     <div class="post__description">
                       <p><%= tweet.body %></p>
                     </div>
                     <img src=<%= tweet.photo_url%> class="img-fluid">
                     <div class="post__interaction">
-                      <ul class="d-flex">
-                        <li><i class="fa-sharp fa-regular fa-comments"
-                            style="color: #3465a4; width: 35px; height:35px"></i>
+                      <ul class="d-flex gap-3">
+                        <%= link_to web_tweet_path(tweet) do %>
+                        <li>
+                          <i class="fa-sharp fa-regular fa-comments" style="color: #3465a4; font-size: 20px;"></i>
                         </li>
-
-                        <li><i class="fas fa-heart" style="color: #cc0000;"></i></li>
+                        <% end %>
+                        </li>
+                        <li><i class="fas fa-heart" style="color: #cc0000; font-size: 20px;"></i></li>
+                        <li><i class="fa-solid fa-retweet" style="color: #1f513e; font-size: 20px;"></i></li>
                       </ul>
 
                     </div>
-                    
+
                   </div>
                 </div>
               </div>
               <div class="comment_area"> </div>
             </div>
 
-        
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+  <script>
+    document.getElementById('icon').addEventListener('click', function() {
+      document.getElementById('fileInput').click();
+    });
+  </script>
 
+</body>
 
-
-<script>
-  document.getElementById('icon').addEventListener('click', function() {
-    document.getElementById('fileInput').click();
-  });
-</script>
+</html>

@@ -8,9 +8,9 @@ class Web::TweetsController < ApplicationController
         quote = params[:quote]
         retweet = params[:retweet]
         url_imagen = params[:photo_url]
-        probando =  upload(url_imagen)
+        photo_url =  upload(url_imagen)
         
-        @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet,photo_url: probando["url"])
+        @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet,photo_url: photo_url["url"])
          
         
         
@@ -105,10 +105,8 @@ class Web::TweetsController < ApplicationController
 
    def show 
     @tweet = Tweet.find(params[:id])
-     respond_to do |format|
-        #format.html
-        format.json {render json: @tweet}
-     end
+    @replies = @tweet.replies
+    render 'show'
         
    end
  
