@@ -97,8 +97,8 @@
             style="width: 35rem;">
             <div class="new__post d-flex flex-row  m-4 gap-4">
 
-              <figure><img class="img-fluid rounded-circle"
-                  src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+              <figure><img class="img-fluid user__tweet--photo rounded-circle"
+                  src=<%= current_user.photo_url%>></figure>
               <div class="form__container">
                 <%= form_with(model: @tweet, url: web_tweets_path, multipart: true) do |form| %>
                 <%= form.hidden_field :user_id, value: current_user.id %>

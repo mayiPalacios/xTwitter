@@ -8,9 +8,12 @@ class Web::TweetsController < ApplicationController
         quote = params[:quote]
         retweet = params[:retweet]
         url_imagen = params[:photo_url]
+        photo_url = nil
+        if url_imagen!=nil
         photo_url =  upload(url_imagen)
-        
-        @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet,photo_url: photo_url["url"])
+        end
+
+        @tweet = Tweet.new(user_id: user_id, body: body, quote: quote, retweet: retweet,photo_url: photo_url)
          
         
         

@@ -103,7 +103,7 @@
             <div style="margin-left: 32px;">
               <div>
                 <figure class="profile-picture"><img class="img-fluid rounded-circle"
-                    src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg"></figure>
+                    src=<%= @user.photo_url %> style=" height: 12vh; width: 18vw;"></figure>
               </div>
               <div>
                 <h3><%= @user.name %> <%= @user.lastname %></h3>
@@ -154,7 +154,7 @@
             <div class="post__info m-4 pr-4">
               <div class="container_user--name d-flex gap-2">
                 <figure>
-                  <img class="img-fluid rounded-circle" src="<%= tweet.user.photo_url %>">
+                  <img class="img-fluid rounded-circle user__tweet--photo" src="<%= tweet.user.photo_url %>">
                 </figure>
                 <div class="user__name d-flex flex-column">
                   <ins><%= tweet.user.name %></ins>
@@ -166,7 +166,7 @@
                 <div class="post__description">
                   <p><%= tweet.body %></p>
                 </div>
-                <img src="<%= tweet.photo_url %>" class="img-fluid">
+                <img src="<%= tweet.photo_url %>" class="img-fluid ">
                 <div class="post__interaction">
                   <ul class="d-flex gap-3">
                      <%= link_to web_tweet_path(tweet) do %>

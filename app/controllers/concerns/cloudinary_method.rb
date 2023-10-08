@@ -8,7 +8,7 @@ module CloudinaryMethod
             )
            
 
-        upload1
+        upload1["url"]
     end
 
 
