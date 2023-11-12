@@ -1,0 +1,69 @@
+<div class="  d-flex justify-content-space-around ">
+      <div class="">
+        <div class="sidebar__container mt-3 ">
+          <ul class="nav flex-column gap-4">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-home fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Inicio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-bell fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Notificaciones
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-envelope fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Mensajes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-bookmark fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Bookmarks
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-users fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Communities
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-star fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Premium
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= link_to web_user_by_username_path(username: current_user.username), class: "nav-link" do %>
+              <i class="fa fa-user-circle fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+              Profile
+              <% end %>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-ellipsis-h fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                More
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= button_to destroy_user_session_path, method: :delete, class: "btn " do %>
+
+              <i class="fa fa-sign-out fa-lg"></i>
+              <span>Sign out</span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fa fa-comment fa-lg"></i> <!-- Añadimos la clase "fa-lg" para hacer el ícono más grande -->
+                Messages
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>

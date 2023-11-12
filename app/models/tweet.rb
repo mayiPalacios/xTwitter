@@ -3,7 +3,7 @@ class Tweet < ApplicationRecord
   has_many :likes
   has_many :bookmarks
   has_many :tags
-  has_many :replies
+  has_many :replies, class_name: 'Reply', foreign_key: 'tweet_id', dependent: :destroy
   validates :body, length: { maximum: 255 }
   validate :body_presence_in_quote
   validate :body_nil_for_retweet
@@ -108,6 +108,8 @@ end
         return "this hashtag has already been created"
       end
     end
+
+   
 
 
  private 

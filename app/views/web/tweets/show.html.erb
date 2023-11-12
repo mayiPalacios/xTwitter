@@ -1,0 +1,184 @@
+<div class="container">
+<div class="  d-flex justify-content-space-around ">
+    <div class="">
+<div class="sidebar__container mt-3 ">
+    <ul class="nav flex-column gap-4">
+
+        <li class="nav-item">
+            <%= link_to web_tweets_path(user_id: current_user.id), class: "nav-link" do %>
+            <i class="fa fa-home fa-lg"></i>
+            Inicio
+            <% end %>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa fa-bell fa-lg"></i>
+                Notificaciones
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                        <i class="fa fa-envelope fa-lg"></i>
+                        Mensajes
+                    </a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-bookmark fa-lg"></i>
+                            Bookmarks
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-users fa-lg"></i>
+                            Communities
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-star fa-lg"></i>
+                            Premium
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to web_user_by_username_path(username: current_user.username), class: "nav-link" do %>
+                        <i class="fa fa-user-circle fa-lg"></i>
+                        Profile
+                        <% end %>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-ellipsis-h fa-lg"></i>
+                            More
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <%= button_to destroy_user_session_path, method: :delete, class: "btn " do %>
+
+                        <i class="fa fa-sign-out fa-lg"></i>
+                        <span>Sign out</span>
+                        <% end %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-comment fa-lg"></i>
+                            Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="post__container mt-3  container d-flex justify-content-center align-items-center flex-column  ">
+            <div class="user__post card" style="width: 35rem;">
+                <div class="post__info m-4 pr-4">
+                    <div class="container_user--name d-flex gap-2">
+                        <figure><img class="img-fluid rounded-circle"
+                                src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg">
+                        </figure>
+                        <div class="user__name d-flex flex-column">
+                            <ins><a><%= @tweet.user.username %></a></ins>
+                            <span class="text-primary">published: <%= @tweet.created_at %></span>
+                        </div>
+                    </div>
+
+                    <div class="post__content mt-2">
+                        <div class="post__description">
+                            <p><%= @tweet.body %></p>
+                        </div>
+                        <img src="<%= @tweet.photo_url %>" class="img-fluid">
+                        <div class="post__interaction">
+                            <ul class="d-flex gap-3">
+                                <%= link_to web_tweet_path(@tweet) do %>
+                                <li>
+                                    <i class="fa-sharp fa-regular fa-comments"
+                                        style="color: #3465a4; font-size: 20px;"></i>
+                                </li>
+                                <% end %>
+                                </li>
+                                <li><i class="fas fa-heart" style="color: #cc0000; font-size: 20px;"></i></li>
+                                <li><i class="fa-solid fa-retweet" style="color: #1f513e; font-size: 20px;"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment_area">
+                <div class="container__create--post card container d-flex justify-content-center align-items-center flex-column mt-4"
+                    style="width: 35rem;">
+                    <div class="new__post d-flex flex-row  m-4 gap-4">
+                        <figure><img class="img-fluid rounded-circle"
+                                src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg">
+                        </figure>
+                        <div class="form__container">
+                            <%= form_with(model: @reply, url: web_tweet_replies_path(@tweet), method: :post, multipart: true) do |form| %>
+                            <%= form.hidden_field :user_id, value: current_user.id %>
+                            <div class="form-group">
+                                <%= form.text_area :body, class: "form-control border-0", rows: 3, placeholder: "Escribe tu respuesta" %>
+                            </div>
+                            <%= form.hidden_field :tweet_id, value: @tweet.id %>
+                            <div class="add__picture--container">
+                                <ul class="d-flex justify-content-end gap-3 mr-4">
+                                    <li>
+                                        <%= form.submit "Responder", class: "btn btn-primary" %>
+                                    </li>
+                                </ul>
+                            </div>
+                            <% end %>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="replies">
+                    <% @replies.each do |reply| %>
+                    <div
+                        class="post__container mt-3 container d-flex justify-content-center align-items-center flex-column">
+                        <div class="user__post card" style="width: 35rem;">
+                            <div class="post__info m-4 pr-4">
+                                <div class="container_user--name d-flex gap-2">
+                                    <figure><img class="img-fluid rounded-circle"
+                                            src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg">
+                                    </figure>
+                                    <div class="user__name d-flex flex-column">
+                                        <ins><a><%= reply.user.username %></a></ins>
+                                        <span class="text-primary">published: <%= reply.created_at %></span>
+                                    </div>
+                                </div>
+
+                                <div class="post__content mt-2">
+                                    <div class="post__description">
+                                        <p><%= reply.body %></p>
+                                    </div>
+                                    <!-- Aquí puedes mostrar la imagen de la respuesta si es necesario -->
+                                    <div class="post__interaction">
+                                        <ul class="d-flex gap-3">
+                                            <%= link_to web_tweet_path(@tweet) do %>
+                                            <li>
+                                                <i class="fa-sharp fa-regular fa-comments"
+                                                    style="color: #3465a4; font-size: 20px;"></i>
+                                            </li>
+                                            <% end %>
+                                            </li>
+                                            <li><i class="fas fa-heart" style="color: #cc0000; font-size: 20px;"></i>
+                                            </li>
+                                            <li><i class="fa-solid fa-retweet"
+                                                    style="color: #1f513e; font-size: 20px;"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+
+    </div>

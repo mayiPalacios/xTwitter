@@ -1,0 +1,92 @@
+.post__container{
+    width: 100%;
+    
+}
+
+.post__info{
+    width: 90%;
+}
+
+.user_post{
+    width: 35rem;
+    
+}
+
+ul {
+    list-style: none;
+    li{
+        cursor: pointer;
+    }
+  }
+
+  .new__post {
+    width: 100%;
+  }
+
+.form__container{
+    width: 80%;
+    border: 1px solid #eee;
+    background-color: #fff;
+    textarea{
+        width: 100%;
+        border: none;
+    }
+    ul{
+        width: 90%;
+    }
+}
+
+
+.form-control:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.user__tweet--photo {
+height: 8vh;
+width: 5vw;
+}
+
+
+.container__main--post{
+    width: 100%;
+}
+
+
+.sidebar__container{
+    background-color: #fff;
+    color: black;
+    a{
+        color: black;
+    }
+}
+
+
+//
+// .sidebar {
+//     background-color: #333;
+//     color: #fff;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100vh;
+//     display: none; /* Inicialmente oculto en pantallas grandes */
+//     transition: width 0.3s;
+// }
+
+// .sidebar.show {
+//     display: block; /* Mostrar en pantallas pequeñas */
+//     width: 100%; /* Ancho completo en pantallas pequeñas */
+//     max-width: 250px; /* Ancho máximo en pantallas grandes */
+// }
+
+// .sidebar .nav-link {
+//     color: #fff;
+// }
+
+// /* Estilos para los iconos */
+// .fa {
+//     font-size: 24px;
+//     margin-right: 10px;
+// }

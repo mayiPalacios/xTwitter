@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Twitter Clone</title>
+  <!-- Agrega aquí tus enlaces a las hojas de estilo de Bootstrap y otros recursos si los tienes -->
+</head>
+<body>
+
+<!-- Navbar para iniciar sesión y cerrar sesión -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">Twitter Clone</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Register', new_user_registration_path, class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Contenedor principal -->
+<div class="container mt-5">
+  <h1>Last Tweets</h1>
+
+  <!-- Genera 10 tweets aleatorios -->
+  <% 10.times do %>
+    <div class="post__container container d-flex justify-content-center align-items-center flex-column mt-4">
+      <div class="user__post card" style="width: 35rem;">
+        <div class="post__info m-4 pr-4">
+          <div class="container_user--name d-flex gap-2">
+            <figure>
+              <img class="img-fluid rounded-circle" src="https://www.wpkixx.com/html/winku-dark/images/resources/friend-avatar10.jpg">
+            </figure>
+            <div class="user__name d-flex flex-column">
+              <ins><a>Jaine Griffith</a></ins>
+              <span class="text-primary">publicado: junio 2, 2018, 19:00</span>
+            </div>
+          </div>
+
+          <div class="post__content mt-2">
+            <img src="https://www.wpkixx.com/html/winku-dark/images/resources/user-post.jpg" class="img-fluid">
+            <div class="post__interaction">
+              <ul class="d-flex">
+                <li><i class="fa-sharp fa-regular fa-comments" style="color: #3465a4; width: 35px; height:35px"></i></li>
+                <li><i class="fas fa-heart" style="color: #cc0000;"></i></li>
+              </ul>
+            </div>
+            <div class="post__description">
+              <p>El auto más hermoso del mundo en Curabitur #test drive booking! El auto más hermoso disponible en América y Arabia Saudita. Puedes reservar tu prueba de manejo en nuestro sitio web oficial.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comment_area"></div>
+    </div>
+  <% end %>
+
+</div>
+
+<!-- Agrega aquí tus enlaces a las hojas de estilo de Bootstrap y otros recursos si los tienes -->
+
+</body>
+</html>

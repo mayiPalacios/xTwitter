@@ -2,15 +2,26 @@
 require 'rails_helper'
 
 RSpec.describe "TweetsLikes", type: :routing do
-  describe "POST /tweets/:tweet_id/likes/new" do
-    it "creates a new like f0r a tweet" do
-      expect(post("/tweets/2/likes")).to route_to("likes#create",tweet_id: "2")
+  describe "POST /api/tweets/:tweet_id/likes" do
+    it "routes to likes#create" do
+      expect(post("/api/tweets/2/likes.json")).to route_to(
+        controller: "api/likes",
+        action: "create",
+        tweet_id: "2",
+        format: "json" 
+      )
     end
   end
 
-  describe "DELETE /tweets/:tweet_id/likes/:id" do
-    it "destroys an existing like for a tweet" do
-      expect(delete("/tweets/2/likes/1")).to route_to("likes#destroy",tweet_id: "2",id:"1")
+  describe "DELETE /api/tweets/:tweet_id/likes/:id" do
+    it "routes to likes#destroy" do
+      expect(delete("/api/tweets/2/likes/1.json")).to route_to(
+        controller: "api/likes",
+        action: "destroy",
+        tweet_id: "2",
+        id: "1",
+        format: "json" 
+      )
     end
   end
 end

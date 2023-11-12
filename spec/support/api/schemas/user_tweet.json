@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "body": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "boolean"
+        },
+        "retweet": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "interaction_reference": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "id",
+        "body",
+        "quote",
+        "retweet",
+        "created_at",
+        "updated_at",
+        "user_id",
+        "interaction_reference"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "body": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "boolean"
+        },
+        "retweet": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "interaction_reference": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "id",
+        "body",
+        "quote",
+        "retweet",
+        "created_at",
+        "updated_at",
+        "user_id",
+        "interaction_reference"
+      ]
+    }
+  ]
+}

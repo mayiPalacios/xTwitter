@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "UsersTweets", type: :routing do
-  describe "GET /users/:id/tweets" do
-    it "returns a paginated list of tweets for a user" do
-      expect(get("/users/2/tweets")).to route_to("tweets#index",user_id:"2")
+  describe "GET /api/users/:user_id/tweets" do
+    it "routes to api/tweets#index" do
+      expect(get("/api/users/2/tweets")).to route_to(
+        format: :json,
+        controller: "api/tweets",
+        action: "index",
+        user_id: "2"
+      )
     end
   end
 end
